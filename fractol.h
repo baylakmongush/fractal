@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2019/12/28 22:29:46 by npetrell         ###   ########.fr       */
+/*   Updated: 2019/12/29 18:44:20 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef struct	s_fract
 	unsigned	ImageWidth;
 }				t_fract;
 
-int				key_press(int key);
+int				key_press(int key, t_fract *struct_fract);
 void			mandelbrot_func(t_fract *struct_fract);
+int				mouse_press(int mouse, t_fract *struct_fract);
 
 #endif
