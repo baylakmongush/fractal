@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2019/12/29 18:44:20 by npetrell         ###   ########.fr       */
+/*   Updated: 2019/12/29 19:42:54 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
+# include "math.h"
 
 typedef struct	s_fract
 {

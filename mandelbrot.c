@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2019/12/29 18:27:29 by npetrell         ###   ########.fr       */
+/*   Updated: 2019/12/29 19:44:37 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int color(double n, double max_iter, int i)
     int             mass[3];
     
     t = n / max_iter;
-    mass[0] = (int)(9 * (1 - t) * t * t * t * 255);
-    mass[1] = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
-    mass[2] = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+    mass[0] = (int)(9 * (1 - t) * pow(t, 3) * 255);
+    mass[1] = (int)(15 * pow(1 - t, 2) * pow(t, 2) * 255);
+    mass[2] = (int)(8.5 * pow(1 - t, 3) * t * 255);
     return (mass[i]);
 }
 
@@ -66,8 +66,8 @@ void			mandelbrot_func(t_fract *struct_fract)
 			n = 0;
             while (n++ < MaxIterations)
             {
-                Z_re2 = Z_re * Z_re; // квадрат действительной части 
-				Z_im2 = Z_im * Z_im; // квадрат мнимой части
+                Z_re2 = pow(Z_re, 2); // квадрат действительной части 
+				Z_im2 = pow(Z_im, 2); // квадрат мнимой части
                 if (Z_re2 + Z_im2 > 4) // проверка, принадлежит ли точка кругу с радиусом 2.
                 {
                     isInside = FALSE;
