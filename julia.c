@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/06 20:38:31 by npetrell         ###   ########.fr       */
+/*   Created: 2020/01/06 20:25:33 by npetrell          #+#    #+#             */
+/*   Updated: 2020/01/06 20:39:37 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int                 color(double n, int i, t_fract *struct_fract)
+int color_1(double n, int i, t_fract *struct_fract)
 {
-    double          t;
+    double         t;
     int             mass[3];
     
     t = n / struct_fract->max_iter;
@@ -24,7 +24,7 @@ int                 color(double n, int i, t_fract *struct_fract)
     return (mass[i]);
 }
 
-void			mandelbrot_func(t_fract *struct_fract)
+void			julia_func(t_fract *struct_fract)
 {
     double		Re_factor;
     double		Im_factor;
@@ -32,8 +32,8 @@ void			mandelbrot_func(t_fract *struct_fract)
 	unsigned	x;
 	int			isInside;
 	double      n;
-	double		c_re;
-	double		c_im;
+	double		k_re;
+	double		k_im;
 	double		Z_re;
 	double		Z_im;
 	double 		Z_re2;
@@ -45,13 +45,13 @@ void			mandelbrot_func(t_fract *struct_fract)
     int i = 0;
     while (y++ < struct_fract->ImageHeight)
     {
-        c_im = struct_fract->MaxIm - y * Im_factor;
+        k_im = struct_fract->MaxIm - y * Im_factor;
 		x = 0;
         while (x++ < struct_fract->ImageWidth)
         {
-            c_re = struct_fract->MinRe + x * Re_factor;
-			Z_re = c_re; // инициализация действ части
-			Z_im = c_im; // инициализация мнимой части 
+            k_re = struct_fract->MinRe + x * Re_factor;
+			Z_re = k_re; // инициализация действ части
+			Z_im = k_im; // инициализация мнимой части 
             isInside = TRUE;
 			n = 0;
             while (n++ < struct_fract->max_iter)
@@ -63,12 +63,12 @@ void			mandelbrot_func(t_fract *struct_fract)
                     isInside = FALSE;
                     break;
                 }
-                Z_im = 2 * Z_re * Z_im + c_im; // основная формула Мандельброта
-                Z_re = Z_re2 - Z_im2 + c_re;
+                Z_im = 2 * Z_re * Z_im + k_im; // основная формула Мандельброта
+                Z_re = Z_re2 - Z_im2 + k_re;
             }
             if (i < 2)
                 i++;
-            isInside ? mlx_pixel_put(struct_fract->mlx_ptr, struct_fract->win_ptr, x, y, 0x000000) : mlx_pixel_put(struct_fract->mlx_ptr, struct_fract->win_ptr, x, y, color(n, i, struct_fract));
+            isInside ? mlx_pixel_put(struct_fract->mlx_ptr, struct_fract->win_ptr, x, y, 0x000000) : mlx_pixel_put(struct_fract->mlx_ptr, struct_fract->win_ptr, x, y, color_1(n, i, struct_fract));
         }
     }
 }
