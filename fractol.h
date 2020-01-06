@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2019/12/29 19:42:54 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:28:16 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@
 
 typedef struct	s_fract
 {
+	double		MinRe;
+    double		MaxRe;
+    double		MinIm;
+	double		MaxIm;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	unsigned	ImageHeight;
 	unsigned	ImageWidth;
+	double		max_iter;
 }				t_fract;
 
 int				key_press(int key, t_fract *struct_fract);
 void			mandelbrot_func(t_fract *struct_fract);
-int				mouse_press(int mouse, t_fract *struct_fract);
-
+int	mouse_press(int mouse, int x, int y, t_fract *struct_fract);
 #endif
