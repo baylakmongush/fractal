@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_mouse_press.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/06 20:02:56 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/13 02:35:42 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,21 @@ int	key_press(int key, t_fract *struct_fract)
 
 int	mouse_press(int mouse, int x, int y, t_fract *struct_fract)
 {
-    x = 0;
-    y = 0;
     if (mouse == 4)
     {
-        struct_fract->MinRe *= 2.3;
-        struct_fract->MaxRe = fabs(struct_fract->MinRe);
-        struct_fract->MinIm = -struct_fract->MaxRe;
-	    struct_fract->MaxIm = struct_fract->MinIm + (struct_fract->MaxRe
-- struct_fract->MinRe) * struct_fract->ImageHeight / struct_fract->ImageWidth;
-        mlx_clear_window(struct_fract->mlx_ptr, struct_fract->win_ptr);
-        mandelbrot_func(struct_fract);
+        struct_fract->MinRe = (x / struct_fract->zoom + struct_fract->MinRe) - (x / (struct_fract->zoom * 1.2));
+	    struct_fract->MinIm = (y / struct_fract->zoom + struct_fract->MinIm) - (y / (struct_fract->zoom * 1.2));
+	    struct_fract->zoom *= 1.2;
+	    struct_fract->max_iter++;
     }
     if (mouse == 5)
     {
-        struct_fract->MinRe /= 2.3;
-        struct_fract->MaxRe = fabs(struct_fract->MinRe);
-        struct_fract->MinIm = -struct_fract->MaxRe;
-	    struct_fract->MaxIm = struct_fract->MinIm + (struct_fract->MaxRe
-- struct_fract->MinRe) * struct_fract->ImageHeight / struct_fract->ImageWidth;
-        mlx_clear_window(struct_fract->mlx_ptr, struct_fract->win_ptr);
-        mandelbrot_func(struct_fract);
+        struct_fract->MinRe = (x / struct_fract->zoom + struct_fract->MinRe) - (x / (struct_fract->zoom / 1.2));
+	    struct_fract->MinIm = (y / struct_fract->zoom + struct_fract->MinIm) - (y / (struct_fract->zoom / 1.2));
+	    struct_fract->zoom /= 1.2;
+	    struct_fract->max_iter--;
     }
-    mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 900, 900, 0xC5329F, ft_itoa(struct_fract->max_iter));
+    mandelbrot_pthread(struct_fract);
+   // mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 100, 100, 0xC5329F, ft_itoa(struct_fract->max_iter));
     return (0);
 }
