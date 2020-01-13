@@ -6,13 +6,13 @@
 #    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/28 21:46:02 by npetrell          #+#    #+#              #
-#    Updated: 2020/01/06 20:38:52 by npetrell         ###   ########.fr        #
+#    Updated: 2020/01/13 20:21:19 by npetrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-GCC = gcc -Wall -Wextra -Werror
+GCC = gcc -Wall -Wextra -Werror 
 
 LIBFT = libft
 
@@ -22,7 +22,7 @@ LFLAG = -L $(LIBFT) -lft
 
 MLFLAG = -framework OpenGL -framework Appkit
 
-SRCS = ./main.c ./key_mouse_press.c ./mandelbrot.c ./julia.c \
+SRCS = ./main.c ./key_mouse_press.c ./mandelbrot.c \
 
 HEADERS = libft/
 

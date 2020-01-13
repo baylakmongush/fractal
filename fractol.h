@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/13 01:58:33 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/13 17:34:23 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define TRUE 1
-# define FALSE 0
+# define SIZE 800
 # include <stdlib.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
@@ -35,8 +34,8 @@ typedef struct	s_fract
 	int			endian;
 	int			sl;
 	int			bpp;
-	unsigned	ImageHeight;
-	unsigned	ImageWidth;
+	int			ImageHeight;
+	int			ImageWidth;
 	double		max_iter;
 }				t_fract;
 
