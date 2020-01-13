@@ -6,12 +6,12 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/13 02:53:16 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/13 04:21:35 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#define THREAD_WIDTH 7
+#define THREAD_WIDTH 9
 
 //gcc -I minilibx_macos minilibx_macos/libmlx.a -framework OpenGL -framework Appkit main.c mandelbrot.c key_mouse_press.c  libft/libft.a
 
@@ -28,8 +28,7 @@ void	put_pxl_to_img(t_fract *data, int x, int y, int color)
 void			*mandelbrot_func(void *data)
 {
     t_fract     *struct_fract;
-	int			isInside;
-	double      n;
+	double      iter;
 	double		c_re;
 	double		c_im;
 	double		Z_re;
@@ -40,29 +39,26 @@ void			*mandelbrot_func(void *data)
     struct_fract = (t_fract*)data;
     while (struct_fract->y < struct_fract->ImageHeight)
     {
-        c_im = struct_fract->y / struct_fract->zoom + struct_fract->MinIm;
 		struct_fract->x = 0;
-        while (struct_fract->x < struct_fract->ImageWidth)
+        while (struct_fract->x < 600)
         {
+            c_im = struct_fract->y / struct_fract->zoom + struct_fract->MinIm;
             c_re = struct_fract->x / struct_fract->zoom + struct_fract->MinRe;
 			Z_re = c_re; // инициализация действ части
 			Z_im = c_im; // инициализация мнимой части 
-            isInside = TRUE;
-			n = 0;
-            while (n < struct_fract->max_iter)
+			iter = 0;
+            Z_re2 = 0;
+            Z_im2 = 0;
+            while (iter < struct_fract->max_iter && Z_re2 + Z_im2 < 4)
             {
                 Z_re2 = pow(Z_re, 2); // квадрат действительной части 
 				Z_im2 = pow(Z_im, 2); // квадрат мнимой части
-                if (Z_re2 + Z_im2 > 4) // проверка, принадлежит ли точка кругу с радиусом 2.
-                {
-                    isInside = FALSE;
-                    break ;
-                }
                 Z_im = 2 * Z_re * Z_im + c_im; // основная формула Мандельброта
                 Z_re = Z_re2 - Z_im2 + c_re;
-                n++;
+                iter++;
             }
-            isInside ? put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, 0x000000) : put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, struct_fract->color * n);
+            (iter == struct_fract->max_iter) ? put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, 0x000000)
+            : put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, struct_fract->color * iter);
             struct_fract->x++;
         }
         struct_fract->y++;
@@ -72,17 +68,17 @@ void			*mandelbrot_func(void *data)
 
 void	mandelbrot_pthread(t_fract *data)
 {
-	t_fract     tab[THREAD_WIDTH];
-	pthread_t	t[THREAD_WIDTH];
+	t_fract     tab[120];
+	pthread_t	t[120];
 	int			i;
 
 	i = 0;
-	while (i < THREAD_WIDTH)
+	while (i < 120)
 	{
 		ft_memcpy((void*)&tab[i], (void*)data, sizeof(t_fract));
-		tab[i].y = ((double)(1.00 / THREAD_WIDTH) * data->ImageWidth) * i;
-		tab[i].ImageHeight = ((double)(1.00 / THREAD_WIDTH) * data->ImageWidth) * (i + 1);
-        pthread_create(&t[i], NULL, mandelbrot_func, &tab[i]);
+		tab[i].y = THREAD_WIDTH * i;
+		tab[i].ImageHeight = THREAD_WIDTH * (i + 1);
+		pthread_create(&t[i], NULL, mandelbrot_func, &tab[i]);
 		i++;
 	}
     while (i--)

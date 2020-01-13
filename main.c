@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/13 02:51:09 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/13 03:32:04 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int         init(t_fract *struct_fract)
 {
-    struct_fract->ImageHeight = 600;
-    struct_fract->ImageWidth = 600;
     struct_fract->MinRe = -2.0;
-    struct_fract->MinIm = -2.0;
+    struct_fract->MinIm = -1.2;
     struct_fract->max_iter = 40;
     struct_fract->zoom = 300;
     struct_fract->color = 265;
@@ -43,8 +41,8 @@ int			main(int ac, char **av)
         init(struct_fract);
     //    mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 500, 500, 0xC5329F, ft_itoa(struct_fract->max_iter));
         mandelbrot_pthread(struct_fract);
-     //   mlx_key_hook(struct_fract->win_ptr, key_press, struct_fract);
         mlx_mouse_hook(struct_fract->win_ptr, mouse_press, struct_fract);
+     //   mlx_key_hook(struct_fract->win_ptr, key_press, struct_fract);
         mlx_loop(struct_fract->mlx_ptr);
     }
   /*  else if (ft_strcmp(av[1], "julia") == 0)
