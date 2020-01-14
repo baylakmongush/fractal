@@ -6,11 +6,19 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/13 19:07:03 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/14 18:18:17 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int julia_motion(int x, int y, t_fract *fractol)
+{
+    fractol->k_re = 4 * ((double)x / SIZE - 0.5);
+    fractol->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
+    julia_func(fractol);
+    return (0);
+}
 
 int         init(t_fract *struct_fract)
 {
@@ -44,6 +52,19 @@ int			main(int ac, char **av)
         mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 110, 10, 0xC5329F, ft_itoa(struct_fract->max_iter));
         mlx_mouse_hook(struct_fract->win_ptr, mouse_press, struct_fract);
         mlx_key_hook(struct_fract->win_ptr, key_press, struct_fract);
+        mlx_loop(struct_fract->mlx_ptr);
+    }
+    if (ft_strcmp(av[1], "julia") == 0)
+    {
+        struct_fract = (t_fract*)malloc(sizeof(t_fract));
+        struct_fract->mlx_ptr = mlx_init();
+        struct_fract->win_ptr = mlx_new_window(struct_fract->mlx_ptr, SIZE, SIZE, av[1]);
+        struct_fract->img = mlx_new_image(struct_fract->mlx_ptr, SIZE, SIZE);
+	    struct_fract->img_ptr = mlx_get_data_addr(struct_fract->img, &struct_fract->bpp, &struct_fract->sl, &struct_fract->endian);
+        init(struct_fract);
+        julia_func(struct_fract);
+        mlx_mouse_hook(struct_fract->win_ptr, julia_motion, struct_fract);
+     //   mlx_key_hook(struct_fract->win_ptr, key_press, struct_fract);
         mlx_loop(struct_fract->mlx_ptr);
     }
 }

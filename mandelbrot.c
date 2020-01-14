@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/13 20:33:41 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/14 17:56:36 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			*mandelbrot_func(void *data)
         }
 		struct_fract->y++;
     }
-    return (data);
+    return (NULL);
 }
 
 void	mandelbrot_pthread(t_fract *struct_fract)
@@ -73,12 +73,6 @@ void	mandelbrot_pthread(t_fract *struct_fract)
 		ft_memcpy((void*)&tab[i], (void*)struct_fract, sizeof(t_fract));
 		tab[i].y = 5 * i;
 		tab[i].ImageHeight = 5 * (i + 1);
-		pthread_create(&t[i], NULL, mandelbrot_func, &tab[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 160)
-	{
 		pthread_create(&t[i], NULL, mandelbrot_func, &tab[i]);
 		i++;
 	}
