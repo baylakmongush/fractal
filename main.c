@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/15 21:08:00 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/15 21:43:46 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int			main(int ac, char **av)
     {
         struct_fract = (t_fract*)malloc(sizeof(t_fract));
         struct_fract->mlx_ptr = mlx_init();
-        struct_fract->win_ptr = mlx_new_window(struct_fract->mlx_ptr,  struct_fract->ImageWidth,  struct_fract->ImageWidth, av[1]);
-        struct_fract->img = mlx_new_image(struct_fract->mlx_ptr,  struct_fract->ImageWidth,  struct_fract->ImageWidth);
+        struct_fract->win_ptr = mlx_new_window(struct_fract->mlx_ptr, 800,  800, av[1]);
+        struct_fract->img = mlx_new_image(struct_fract->mlx_ptr, 800, 800);
 	    struct_fract->img_ptr = mlx_get_data_addr(struct_fract->img, &struct_fract->bpp, &struct_fract->sl, &struct_fract->endian);
         init(struct_fract);
         mandelbrot_pthread(struct_fract);
