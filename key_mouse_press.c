@@ -6,19 +6,19 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/14 17:56:38 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/15 20:58:56 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
-int	key_press(int key, t_fract *struct_fract)
+int	key_press(int key)
 {
     if (key == 53)
         exit (0);
-    mlx_clear_window(struct_fract->mlx_ptr, struct_fract->win_ptr);
-    mandelbrot_pthread(struct_fract);
+ //   mlx_clear_window(struct_fract->mlx_ptr, struct_fract->win_ptr);
+//    mandelbrot_pthread(struct_fract);
     return (0);
 }
 
@@ -37,6 +37,12 @@ int	mouse_press(int mouse, int x, int y, t_fract *struct_fract)
 	    struct_fract->MinIm = (y / struct_fract->zoom + struct_fract->MinIm) - (y / (struct_fract->zoom / 1.2));
 	    struct_fract->zoom /= 1.2;
 	    struct_fract->max_iter--;
+    }
+    if (mouse == 1)
+    {
+        struct_fract->k_re = 4 * ((double)x / SIZE - 0.5);
+        struct_fract->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
+        julia_pthread(struct_fract);
     }
     mandelbrot_pthread(struct_fract);
     mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5, 10, 0x3a8888, "iteration: ");
