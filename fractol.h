@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/15 21:39:32 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:07:22 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_fract
 	double		max_iter;
 	double		k_im;
 	double		k_re;
+	int			fractol;
 }				t_fract;
 
 int				key_press(int key);
@@ -46,4 +47,5 @@ int				mouse_press(int mouse, int x, int y, t_fract *struct_fract);
 void			mandelbrot_pthread(t_fract *data);
 void			put_pxl_to_img(t_fract *data, int x, int y, int color);
 void			julia_pthread(t_fract *struct_fract);
+int				julia_motion(int x, int y, t_fract *fractol);
 #endif

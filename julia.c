@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/15 21:40:11 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:11:57 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void			*julia_func(void *data)
     struct_fract = (t_fract*)data;
     struct_fract->MinRe = -1.4;
     struct_fract->MinIm = -1.4;
-    /*struct_fract->k_im = 0.6;
-    struct_fract->k_re = -0.4;*/
     while (struct_fract->y < struct_fract->ImageHeight)
     {
 		struct_fract->x = 0;

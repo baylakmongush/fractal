@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/15 21:43:46 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:18:18 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-int julia_motion(int mouse, int x, int y, t_fract *fractol)
-{
-    if (mouse == 1)
-    {
-        fractol->k_re = 4 * ((double)x / SIZE - 0.5);
-        fractol->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
-        julia_pthread(fractol);
-    }
-    return (0);
-}
 
 int         init(t_fract *struct_fract)
 {
@@ -51,6 +40,7 @@ int			main(int ac, char **av)
         struct_fract->img = mlx_new_image(struct_fract->mlx_ptr, 800, 800);
 	    struct_fract->img_ptr = mlx_get_data_addr(struct_fract->img, &struct_fract->bpp, &struct_fract->sl, &struct_fract->endian);
         init(struct_fract);
+        struct_fract->fractol = 1;
         mandelbrot_pthread(struct_fract);
         mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5, 10, 0x3a8888, "iteration: ");
         mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 110, 10, 0xC5329F, ft_itoa(struct_fract->max_iter));
@@ -66,8 +56,12 @@ int			main(int ac, char **av)
         struct_fract->img = mlx_new_image(struct_fract->mlx_ptr, 800, 800);
 	    struct_fract->img_ptr = mlx_get_data_addr(struct_fract->img, &struct_fract->bpp, &struct_fract->sl, &struct_fract->endian);
         init(struct_fract);
+        struct_fract->fractol = 2;
         julia_pthread(struct_fract);
-        mlx_mouse_hook(struct_fract->win_ptr, julia_motion, struct_fract);
+        mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5, 10, 0x3a8888, "iteration: ");
+        mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 110, 10, 0xC5329F, ft_itoa(struct_fract->max_iter));
+        mlx_hook(struct_fract->win_ptr, 6, 1L < 6, julia_motion, struct_fract);
+        mlx_mouse_hook(struct_fract->win_ptr, mouse_press, struct_fract);
         mlx_key_hook(struct_fract->win_ptr, key_press, struct_fract);
         mlx_loop(struct_fract->mlx_ptr);
     }
