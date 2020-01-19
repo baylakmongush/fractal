@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/16 17:07:22 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/19 22:50:01 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 typedef struct	s_fract
 {
-	double		MinRe;
-    double		MinIm;
+	double		min_re;
+	double		min_im;
 	int			x;
 	int			y;
 	double		zoom;
-	int			color;	
+	int			color;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img;
@@ -34,18 +34,21 @@ typedef struct	s_fract
 	int			endian;
 	int			sl;
 	int			bpp;
-	int			ImageHeight;
-	int			ImageWidth;
+	int			image_height;
+	int			image_width;
+	double		iter;
 	double		max_iter;
 	double		k_im;
 	double		k_re;
 	int			fractol;
 }				t_fract;
 
-int				key_press(int key);
+int				key_press(int key, t_fract *struct_fract);
 int				mouse_press(int mouse, int x, int y, t_fract *struct_fract);
 void			mandelbrot_pthread(t_fract *data);
 void			put_pxl_to_img(t_fract *data, int x, int y, int color);
 void			julia_pthread(t_fract *struct_fract);
 int				julia_motion(int x, int y, t_fract *fractol);
+void			*celc_mandelbar_func(void *data);
+void			celc_mandelbar_pthread(t_fract *struct_fract);
 #endif

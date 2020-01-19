@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   celtic_mandelbar.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/19 22:58:31 by npetrell         ###   ########.fr       */
+/*   Created: 2020/01/19 20:21:40 by npetrell          #+#    #+#             */
+/*   Updated: 2020/01/19 22:42:21 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#define THREAD_WIDTH 5
 
-//gcc -I minilibx_macos minilibx_macos/libmlx.a -framework OpenGL -framework Appkit main.c mandelbrot.c key_mouse_press.c  libft/libft.a
-
-void	put_pxl_to_img(t_fract *data, int x, int y, int color)
-{
-	if (data->x < SIZE && data->y < SIZE)
-	{
-		color = mlx_get_color_value(data->mlx_ptr, color);
-		ft_memcpy(data->img_ptr + 4 * SIZE * y + x * 4, &color, sizeof(int));
-	}
-}
-
-void			*mandelbrot_func(void *data)
+void			*celc_mandelbar_func(void *data)
 {
     t_fract     *struct_fract;
 	double      iter;
@@ -32,7 +20,7 @@ void			*mandelbrot_func(void *data)
 	double		c_im;
 	double		Z_re;
 	double		Z_im;
-	double		Z_im2;
+    double      tmp;
 
     struct_fract = (t_fract*)data;
     while (struct_fract->y < struct_fract->image_height)
@@ -47,9 +35,9 @@ void			*mandelbrot_func(void *data)
 			iter = 0;
             while (iter < struct_fract->max_iter && ((pow(Z_re, 2) + pow(Z_im, 2)) <= 4))
             {
-				Z_im2 = pow(Z_im, 2);
-                Z_im = 2 * Z_re * Z_im + c_im;
-                Z_re = pow(Z_re, 2) - Z_im2 + c_re;
+                tmp = Z_re;
+                Z_re = fabs(pow(Z_re, 2) - pow(Z_im, 2)) + c_re;
+                Z_im = -2.0 * tmp * Z_im + c_im;
                 iter++;
             }
             (iter == struct_fract->max_iter) ? put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, 0x000000)
@@ -61,7 +49,7 @@ void			*mandelbrot_func(void *data)
     return (NULL);
 }
 
-void	mandelbrot_pthread(t_fract *struct_fract)
+void	celc_mandelbar_pthread(t_fract *struct_fract)
 {
 	t_fract     tab[160];
 	pthread_t	t[160];
@@ -73,7 +61,7 @@ void	mandelbrot_pthread(t_fract *struct_fract)
 		ft_memcpy((void*)&tab[i], (void*)struct_fract, sizeof(t_fract));
 		tab[i].y = 5 * i;
 		tab[i].image_height = 5 * (i + 1);
-		pthread_create(&t[i], NULL, mandelbrot_func, &tab[i]);
+		pthread_create(&t[i], NULL, celc_mandelbar_func, &tab[i]);
 		i++;
 	}
     while (i--)
