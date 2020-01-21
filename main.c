@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/19 22:57:55 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:16:54 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void		func_init(char *str, t_fract *struct_fract)
 int				main(int ac, char **av)
 {
 	t_fract		*struct_fract;
+	char		*nb;
 
 	if (ac == 1)
 		ft_out();
@@ -76,10 +77,8 @@ int				main(int ac, char **av)
 		struct_fract = (t_fract*)malloc(sizeof(t_fract));
 		init(av[1], struct_fract);
 		func_init(av[1], struct_fract);
-		mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr,
-5, 10, 0x3a8888, "iteration: ");
-		mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 110,
-10, 0xC5329F, ft_itoa(struct_fract->max_iter));
+		nb = ft_itoa(struct_fract->max_iter);
+		draw(struct_fract);
 		mlx_mouse_hook(struct_fract->win_ptr, mouse_press, struct_fract);
 		mlx_key_hook(struct_fract->win_ptr, key_press, struct_fract);
 		mlx_loop(struct_fract->mlx_ptr);

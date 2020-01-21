@@ -6,24 +6,34 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/19 23:01:43 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:16:06 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	draw(t_fract *struct_fract)
+void		draw(t_fract *struct_fract)
 {
+	char	*nb;
+
 	if (struct_fract->fractol == 1)
 		mandelbrot_pthread(struct_fract);
 	if (struct_fract->fractol == 2)
 		julia_pthread(struct_fract);
 	if (struct_fract->fractol == 3)
 		celc_mandelbar_pthread(struct_fract);
+	nb = ft_itoa(struct_fract->max_iter);
 	mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5,
 10, 0x3a8888, "iteration: ");
 	mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 110, 10,
-0xC5329F, ft_itoa(struct_fract->max_iter));
+0xC5329F, nb);
+	free(nb);
+	mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5,
+	30, 0x3a8888, "colors change key: 1, 2, 3");
+	mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5,
+50, 0x3a8888, "zoom up/down: mouse's scroll wheel");
+	mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5,
+70, 0x3a8888, "iteration up/down key: +, -");
 }
 
 int			key_press(int key, t_fract *struct_fract)
@@ -36,6 +46,10 @@ int			key_press(int key, t_fract *struct_fract)
 		struct_fract->color = 2065;
 	if (key == 20)
 		struct_fract->color = 1677216;
+	if (key == 27)
+		struct_fract->max_iter--;
+	if (key == 24)
+		struct_fract->max_iter++;
 	mlx_clear_window(struct_fract->mlx_ptr, struct_fract->win_ptr);
 	draw(struct_fract);
 	return (0);
@@ -50,7 +64,6 @@ struct_fract->min_re) - (x / (struct_fract->zoom * 1.2));
 		struct_fract->min_im = (y / struct_fract->zoom +
 struct_fract->min_im) - (y / (struct_fract->zoom * 1.2));
 		struct_fract->zoom *= 1.2;
-		struct_fract->max_iter++;
 	}
 	if (mouse == 5)
 	{
@@ -59,7 +72,6 @@ struct_fract->min_re) - (x / (struct_fract->zoom / 1.2));
 		struct_fract->min_im = (y / struct_fract->zoom +
 struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 		struct_fract->zoom /= 1.2;
-		struct_fract->max_iter--;
 	}
 	if (mouse == 1)
 	{

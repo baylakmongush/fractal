@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/19 22:50:01 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:08:22 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct	s_fract
 	double		max_iter;
 	double		k_im;
 	double		k_re;
+	double		c_re;
+	double		c_im;
 	int			fractol;
 }				t_fract;
 
@@ -51,4 +53,5 @@ void			julia_pthread(t_fract *struct_fract);
 int				julia_motion(int x, int y, t_fract *fractol);
 void			*celc_mandelbar_func(void *data);
 void			celc_mandelbar_pthread(t_fract *struct_fract);
+void			draw(t_fract *struct_fract);
 #endif
