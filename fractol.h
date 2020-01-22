@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/21 18:08:22 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:33:47 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_fract
 	double		c_re;
 	double		c_im;
 	int			fractol;
+	pthread_t	pthread;
 }				t_fract;
 
 int				key_press(int key, t_fract *struct_fract);
