@@ -6,11 +6,20 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/19 23:02:48 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:41:18 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void			put_pxl_to_img(t_fract *data, int x, int y, int color)
+{
+	if (data->x < SIZE && data->y < SIZE)
+	{
+		color = mlx_get_color_value(data->mlx_ptr, color);
+		ft_memcpy(data->img_ptr + 4 * SIZE * y + x * 4, &color, sizeof(int));
+	}
+}
 
 static void		draw_julia(t_fract *struct_fract)
 {
@@ -38,13 +47,16 @@ put_pxl_to_img(struct_fract, struct_fract->x,
 void			*julia_func(void *data)
 {
 	t_fract		*struct_fract;
+	double		tmp;
 
 	struct_fract = (t_fract*)data;
 	struct_fract->min_re = -1.4;
 	struct_fract->min_im = -1.4;
-	while (struct_fract->y < struct_fract->image_height)
+	struct_fract->y = 0;
+	tmp = struct_fract->x;
+	while (struct_fract->y < SIZE)
 	{
-		struct_fract->x = 0;
+		struct_fract->x = tmp;
 		while (struct_fract->x < struct_fract->image_width)
 		{
 			draw_julia(struct_fract);
@@ -65,8 +77,8 @@ void			julia_pthread(t_fract *struct_fract)
 	while (i < 160)
 	{
 		ft_memcpy((void*)&tab[i], (void*)struct_fract, sizeof(t_fract));
-		tab[i].y = 5 * i;
-		tab[i].image_height = 5 * (i + 1);
+		tab[i].x = 5 * i;
+		tab[i].image_width = 5 * (i + 1);
 		pthread_create(&t[i], NULL, julia_func, &tab[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:21:40 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/21 18:25:15 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:53:15 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,15 @@ struct_fract->min_re;
 void			*celc_mandelbar_func(void *data)
 {
 	t_fract		*struct_fract;
+	double		tmp;
 
 	struct_fract = (t_fract*)data;
-	while (struct_fract->y < struct_fract->image_height)
+	struct_fract->y = 0;
+	tmp = struct_fract->x;
+	while (struct_fract->y < SIZE)
 	{
-		struct_fract->x = 0;
-		while (struct_fract->x < SIZE)
+		struct_fract->x = tmp;
+		while (struct_fract->x < struct_fract->image_width)
 		{
 			celt_mand_put(struct_fract);
 			struct_fract->x++;
@@ -67,13 +70,17 @@ void			celc_mandelbar_pthread(t_fract *struct_fract)
 	while (i < 160)
 	{
 		ft_memcpy((void*)&tab[i], (void*)struct_fract, sizeof(t_fract));
-		tab[i].y = 5 * i;
-		tab[i].image_height = 5 * (i + 1);
+		tab[i].x = 5 * i;
+		tab[i].image_width = 5 * (i + 1);
 		pthread_create(&t[i], NULL, celc_mandelbar_func, &tab[i]);
 		i++;
 	}
-	while (i--)
+	i = 0;
+	while (i < 160)
+	{
 		pthread_join(t[i], NULL);
-	mlx_put_image_to_window(struct_fract->mlx_ptr,
-struct_fract->win_ptr, struct_fract->img, 0, 0);
+		i++;
+	}
+	mlx_put_image_to_window(struct_fract->mlx_ptr, struct_fract->win_ptr,
+struct_fract->img, 0, 0);
 }

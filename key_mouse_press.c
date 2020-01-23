@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/21 18:16:06 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:55:27 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			key_press(int key, t_fract *struct_fract)
 	if (key == 19)
 		struct_fract->color = 2065;
 	if (key == 20)
-		struct_fract->color = 1677216;
+		struct_fract->color = 2605;
 	if (key == 27)
 		struct_fract->max_iter--;
 	if (key == 24)
