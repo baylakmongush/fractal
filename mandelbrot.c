@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/23 18:47:23 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:17:00 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,21 @@ void			*mandelbrot_func(void *data)
 
 void			mandelbrot_pthread(t_fract *struct_fract)
 {
-	t_fract		tab[160];
-	pthread_t	t[160];
+	t_fract		tmp[5];
+	pthread_t	thread[5];
 	int			i;
 
 	i = 0;
-	while (i < 160)
+	while (i < 5)
 	{
-		ft_memcpy((void*)&tab[i], (void*)struct_fract, sizeof(t_fract));
-		tab[i].x = 5 * i;
-		tab[i].image_width = 5 * (i + 1);
-		pthread_create(&t[i], NULL, mandelbrot_func, &tab[i]);
+		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
+		tmp[i].x = ((1.00 / 5) * SIZE) * i;
+		tmp[i].image_width = ((1.00 / 5) * SIZE) * (i + 1);
+		pthread_create(&thread[i], NULL, mandelbrot_func, &tmp[i]);
 		i++;
 	}
-	i = 0;
-	while (i < 160)
-	{
-		pthread_join(t[i], NULL);
-		i++;
-	}
+	while (i--)
+		pthread_join(thread[i], NULL);
 	mlx_put_image_to_window(struct_fract->mlx_ptr, struct_fract->win_ptr,
 struct_fract->img, 0, 0);
 }

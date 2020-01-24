@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/23 16:55:27 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:29:54 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		draw(t_fract *struct_fract)
 	if (struct_fract->fractol == 2)
 		julia_pthread(struct_fract);
 	if (struct_fract->fractol == 3)
-		celc_mandelbar_pthread(struct_fract);
+		celt_mandelbar_pthread(struct_fract);
 	nb = ft_itoa(struct_fract->max_iter);
 	mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5,
 10, 0x3a8888, "iteration: ");
@@ -45,7 +45,7 @@ int			key_press(int key, t_fract *struct_fract)
 	if (key == 19)
 		struct_fract->color = 2065;
 	if (key == 20)
-		struct_fract->color = 2605;
+		struct_fract->color = 2060;
 	if (key == 27)
 		struct_fract->max_iter--;
 	if (key == 24)

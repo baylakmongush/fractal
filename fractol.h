@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/22 16:33:47 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:22:19 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void			mandelbrot_pthread(t_fract *data);
 void			put_pxl_to_img(t_fract *data, int x, int y, int color);
 void			julia_pthread(t_fract *struct_fract);
 int				julia_motion(int x, int y, t_fract *fractol);
-void			*celc_mandelbar_func(void *data);
-void			celc_mandelbar_pthread(t_fract *struct_fract);
+void			celt_mandelbar_pthread(t_fract *struct_fract);
 void			draw(t_fract *struct_fract);
 #endif

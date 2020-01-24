@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/21 18:16:54 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:27:42 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		func_init(char *str, t_fract *struct_fract)
 	}
 	else if (ft_strcmp(str, "celtic_mandelbar") == 0)
 	{
-		celc_mandelbar_pthread(struct_fract);
+		celt_mandelbar_pthread(struct_fract);
 		struct_fract->fractol = 3;
 	}
 }
