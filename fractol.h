@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/26 15:27:05 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/26 18:49:14 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_color
 
 typedef struct	s_fract
 {
+	int			id;
 	double		min_re;
 	double		min_im;
 	int			x;

@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/26 15:19:13 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/26 20:14:14 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,44 +39,62 @@ put_pxl(struct_fract, struct_fract->x,
 struct_fract->y, struct_fract->color * struct_fract->iter);
 }
 
-void			*mandelbrot_func(void *data)
+void			mandelbrot_func(void *data)
 {
 	t_fract		*struct_fract;
-	double		tmp;
 
 	struct_fract = (t_fract*)data;
 	struct_fract->y = 0;
-	tmp = struct_fract->x;
 	while (struct_fract->y < SIZE)
 	{
-		struct_fract->x = tmp;
-		while (struct_fract->x < struct_fract->image_width)
+		struct_fract->x = 0;
+		while (struct_fract->x < SIZE)
 		{
 			mandelbrot_put(struct_fract);
 			struct_fract->x++;
 		}
 		struct_fract->y++;
 	}
+	mlx_put_image_to_window(struct_fract->mlx_ptr, struct_fract->win_ptr,
+struct_fract->img, 0, 0);
+}
+
+void		*thread_f(void *m)
+{
+	t_fract		*t;
+	int			x;
+	int			y;
+
+	t = (t_fract *)m;
+	y = SIZE / 8 * t->id;
+	while (y < SIZE / 8 * (t->id + 1))
+	{
+		x = 0;
+		while (x < SIZE)
+		{
+			mandelbrot_put(t);
+			x++;
+		}
+		y++;
+	}
 	return (NULL);
 }
 
 void			mandelbrot_pthread(t_fract *struct_fract)
 {
-	t_fract		tmp[150];
-	pthread_t	thread[150];
+	t_fract		tmp[8];
+	pthread_t	thread[8];
 	int			i;
 
 	i = 0;
-	while (i < 150)
+	while (i < 8)
 	{
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = 5 * i;
-		tmp[i].image_width = 5 * (i + 1);
-		pthread_create(&thread[i], NULL, mandelbrot_func, &tmp[i]);
+		tmp[i].id = i;
+		pthread_create(&thread[i] , NULL, thread_f, &tmp[i]);
 		i++;
 	}
 	while (i--)
 		pthread_join(thread[i], NULL);
-	mlx_put_image_to_window(struct_fract->mlx_ptr, struct_fract->win_ptr,
-struct_fract->img, 0, 0);
+	mandelbrot_func(struct_fract);
 }
