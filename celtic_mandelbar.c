@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   celtic_mandelbar.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:21:40 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/24 16:23:16 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/26 15:19:27 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ struct_fract->min_re;
 		struct_fract->iter++;
 	}
 	(struct_fract->iter == struct_fract->max_iter) ?
-	put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
-	put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y,
+	put_pxl(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
+	put_pxl(struct_fract, struct_fract->x, struct_fract->y,
 	struct_fract->color * struct_fract->iter);
 }
 

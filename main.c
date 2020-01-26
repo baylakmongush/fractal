@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/24 16:27:42 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/26 16:16:43 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void		func_init(char *str, t_fract *struct_fract)
 	}
 	else if (ft_strcmp(str, "julia") == 0)
 	{
+		struct_fract->min_re = -1.4;
+		struct_fract->min_im = -1.4;
 		julia_pthread(struct_fract);
 		mlx_hook(struct_fract->win_ptr, 6, 1L < 6, julia_motion, struct_fract);
 		struct_fract->fractol = 2;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/24 16:17:00 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/26 15:19:13 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ struct_fract->min_re;
 		struct_fract->iter++;
 	}
 	(struct_fract->iter == struct_fract->max_iter) ?
-put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
-put_pxl_to_img(struct_fract, struct_fract->x,
+put_pxl(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
+put_pxl(struct_fract, struct_fract->x,
 struct_fract->y, struct_fract->color * struct_fract->iter);
 }
 
@@ -62,16 +62,16 @@ void			*mandelbrot_func(void *data)
 
 void			mandelbrot_pthread(t_fract *struct_fract)
 {
-	t_fract		tmp[5];
-	pthread_t	thread[5];
+	t_fract		tmp[150];
+	pthread_t	thread[150];
 	int			i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 150)
 	{
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = ((1.00 / 5) * SIZE) * i;
-		tmp[i].image_width = ((1.00 / 5) * SIZE) * (i + 1);
+		tmp[i].x = 5 * i;
+		tmp[i].image_width = 5 * (i + 1);
 		pthread_create(&thread[i], NULL, mandelbrot_func, &tmp[i]);
 		i++;
 	}

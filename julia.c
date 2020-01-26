@@ -3,21 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/24 16:23:40 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/26 16:16:29 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void			put_pxl_to_img(t_fract *data, int x, int y, int color)
+int		get_color(t_color f, t_fract *data, int color)
 {
+	int t;
+	
+	t = data->iter / data->max_iter;
+	f.r = (int)(9 * (1 - t) * pow(t, 3) * 255);
+	f.g = (int)(15 * pow((1 - t), 2) * pow(t, 2) * 255);
+	f.b = (int)(8.5 * pow((1 - t), 3) * t * 255);
+	f.pixel = color;
+	return (f.r, f.g, f.b, f.pixel);
+}
+
+void			put_pxl(t_fract *data, int x, int y, int color)
+{
+	t_color		f;
+	int			clr;
+
 	if (data->x < SIZE && data->y < SIZE)
 	{
-		color = mlx_get_color_value(data->mlx_ptr, color);
-		ft_memcpy(data->img_ptr + 4 * SIZE * y + x * 4, &color, sizeof(int));
+		clr = get_color(f, data, color);
+		*(int*)(data->img_ptr + (x + y * SIZE) * 4) = clr;
 	}
 }
 
@@ -39,8 +54,8 @@ static void		draw_julia(t_fract *struct_fract)
 		struct_fract->iter++;
 	}
 	(struct_fract->iter == struct_fract->max_iter) ?
-put_pxl_to_img(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
-put_pxl_to_img(struct_fract, struct_fract->x,
+put_pxl(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
+put_pxl(struct_fract, struct_fract->x,
 	struct_fract->y, struct_fract->color * struct_fract->iter);
 }
 
@@ -50,8 +65,6 @@ void			*julia_func(void *data)
 	double		tmp;
 
 	struct_fract = (t_fract*)data;
-	struct_fract->min_re = -1.4;
-	struct_fract->min_im = -1.4;
 	struct_fract->y = 0;
 	tmp = struct_fract->x;
 	while (struct_fract->y < SIZE)

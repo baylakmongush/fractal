@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_mouse_press.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/24 16:29:54 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/26 16:18:05 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,19 @@ int			key_press(int key, t_fract *struct_fract)
 	if (key == 19)
 		struct_fract->color = 2065;
 	if (key == 20)
-		struct_fract->color = 2060;
+		struct_fract->color = 2050;
 	if (key == 27)
 		struct_fract->max_iter--;
 	if (key == 24)
 		struct_fract->max_iter++;
+	if (key == 123)
+		struct_fract->min_re += 0.1;
+	if (key == 124)
+		struct_fract->min_re -= 0.1;
+	if (key == 125)
+		struct_fract->min_im -= 0.1;
+	if (key == 126)
+		struct_fract->min_im += 0.1;
 	mlx_clear_window(struct_fract->mlx_ptr, struct_fract->win_ptr);
 	draw(struct_fract);
 	return (0);
@@ -72,11 +80,6 @@ struct_fract->min_re) - (x / (struct_fract->zoom / 1.2));
 		struct_fract->min_im = (y / struct_fract->zoom +
 struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 		struct_fract->zoom /= 1.2;
-	}
-	if (mouse == 1)
-	{
-		struct_fract->k_re = 4 * ((double)x / SIZE - 0.5);
-		struct_fract->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
 	}
 	draw(struct_fract);
 	return (0);
