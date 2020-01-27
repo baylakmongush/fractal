@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_mouse_press.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/26 18:22:50 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/27 15:46:35 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		draw(t_fract *struct_fract)
 		julia_pthread(struct_fract);
 	if (struct_fract->fractol == 3)
 		celt_mandelbar_pthread(struct_fract);
+	if (struct_fract->fractol == 4)
+		mandelbar_pthread(struct_fract);	
 	nb = ft_itoa(struct_fract->max_iter);
 	mlx_string_put(struct_fract->mlx_ptr, struct_fract->win_ptr, 5,
 10, 0x3a8888, "iteration: ");
@@ -45,7 +47,7 @@ int			key_press(int key, t_fract *struct_fract)
 	if (key == 19)
 		struct_fract->color = 2065;
 	if (key == 20)
-		struct_fract->color = 2050;
+		struct_fract->color = 1048585;
 	if (key == 27)
 		struct_fract->max_iter--;
 	if (key == 24)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/26 18:49:14 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/27 15:22:25 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void			julia_pthread(t_fract *struct_fract);
 int				julia_motion(int x, int y, t_fract *fractol);
 void			celt_mandelbar_pthread(t_fract *struct_fract);
 void			draw(t_fract *struct_fract);
+void			mandelbar_pthread(t_fract *struct_fract);
 #endif

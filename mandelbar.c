@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   mandelbar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/27 16:03:44 by npetrell         ###   ########.fr       */
+/*   Created: 2020/01/27 15:20:09 by npetrell          #+#    #+#             */
+/*   Updated: 2020/01/27 15:23:05 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void		mandelbrot_put(t_fract *struct_fract)
+static void		mandelbar_put(t_fract *struct_fract)
 {
 	double		z_re;
 	double		z_im;
@@ -29,7 +29,7 @@ struct_fract->min_re;
 ((pow(z_re, 2) + pow(z_im, 2)) <= 4))
 	{
 		z_im2 = pow(z_im, 2);
-		z_im = 2 * z_re * z_im + struct_fract->c_im;
+		z_im = -2 * z_re * z_im + struct_fract->c_im;
 		z_re = pow(z_re, 2) - z_im2 + struct_fract->c_re;
 		struct_fract->iter++;
 	}
@@ -39,7 +39,7 @@ put_pxl(struct_fract, struct_fract->x,
 struct_fract->y, struct_fract->color * struct_fract->iter);
 }
 
-void			*mandelbrot_func(void *data)
+void			*mandelbar_func(void *data)
 {
 	t_fract		*struct_fract;
 	double		tmp;
@@ -52,7 +52,7 @@ void			*mandelbrot_func(void *data)
 		struct_fract->x = tmp;
 		while (struct_fract->x < struct_fract->image_width)
 		{
-			mandelbrot_put(struct_fract);
+			mandelbar_put(struct_fract);
 			struct_fract->x++;
 		}
 		struct_fract->y++;
@@ -60,7 +60,7 @@ void			*mandelbrot_func(void *data)
 	return (NULL);
 }
 
-void			mandelbrot_pthread(t_fract *struct_fract)
+void			mandelbar_pthread(t_fract *struct_fract)
 {
 	t_fract		tmp[160];
 	pthread_t	thread[160];
@@ -72,7 +72,7 @@ void			mandelbrot_pthread(t_fract *struct_fract)
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
 		tmp[i].x = 5 * i;
 		tmp[i].image_width = 5 * (i + 1);
-		pthread_create(&thread[i], NULL, mandelbrot_func, &tmp[i]);
+		pthread_create(&thread[i], NULL, mandelbar_func, &tmp[i]);
 		i++;
 	}
 	while (i--)

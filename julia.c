@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/26 16:16:29 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/27 15:14:08 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		get_color(t_color f, t_fract *data, int color)
+/*int		get_color(t_color f, t_fract *data, int color)
 {
 	int t;
 	
@@ -22,18 +22,12 @@ int		get_color(t_color f, t_fract *data, int color)
 	f.b = (int)(8.5 * pow((1 - t), 3) * t * 255);
 	f.pixel = color;
 	return (f.r, f.g, f.b, f.pixel);
-}
+}*/
 
 void			put_pxl(t_fract *data, int x, int y, int color)
 {
-	t_color		f;
-	int			clr;
-
 	if (data->x < SIZE && data->y < SIZE)
-	{
-		clr = get_color(f, data, color);
-		*(int*)(data->img_ptr + (x + y * SIZE) * 4) = clr;
-	}
+		*(int*)(data->img_ptr + (x + y * SIZE) * 4) = color;
 }
 
 static void		draw_julia(t_fract *struct_fract)
@@ -82,16 +76,16 @@ void			*julia_func(void *data)
 
 void			julia_pthread(t_fract *struct_fract)
 {
-	t_fract		tmp[5];
-	pthread_t	thread[5];
+	t_fract		tmp[160];
+	pthread_t	thread[160];
 	int			i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 160)
 	{
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = ((1.00 / 5) * SIZE) * i;
-		tmp[i].image_width = ((1.00 / 5) * SIZE) * (i + 1);
+		tmp[i].x = 5 * i;
+		tmp[i].image_width = 5 * (i + 1);
 		pthread_create(&thread[i], NULL, julia_func, &tmp[i]);
 		i++;
 	}

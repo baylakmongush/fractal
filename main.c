@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/26 16:16:43 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/27 15:25:30 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void		ft_out(void)
 {
-	ft_putendl("Usage: ./fractal 'mandelbrot' | 'julia' | 'celtic_mandelbar'");
+	ft_putendl("Usage: ./fractal 'mandelbrot' | 'julia' | 'celtic_mandelbar' | 'mandelbar'");
 	exit(0);
 }
 
 static int		check_valid(char *str)
 {
 	if (ft_strcmp(str, "mandelbrot") == 0 || ft_strcmp(str, "julia") == 0
-	|| ft_strcmp(str, "celtic_mandelbar") == 0)
+	|| ft_strcmp(str, "celtic_mandelbar") == 0 || ft_strcmp(str, "mandelbar") == 0)
 		return (0);
 	ft_out();
 	return (0);
@@ -63,6 +63,11 @@ static void		func_init(char *str, t_fract *struct_fract)
 	{
 		celt_mandelbar_pthread(struct_fract);
 		struct_fract->fractol = 3;
+	}
+	else if (ft_strcmp(str, "mandelbar") == 0)
+	{
+		celt_mandelbar_pthread(struct_fract);
+		struct_fract->fractol = 4;
 	}
 }
 

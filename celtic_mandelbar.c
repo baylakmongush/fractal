@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   celtic_mandelbar.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:21:40 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/26 15:19:27 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/27 15:06:58 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ void			*celt_mandelbar_func(void *data)
 
 void			celt_mandelbar_pthread(t_fract *struct_fract)
 {
-	t_fract		tmp[5];
-	pthread_t	thread[5];
+	t_fract		tmp[160];
+	pthread_t	thread[160];
 	int			i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 160)
 	{
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = ((1.00 / 5) * SIZE) * i;
-		tmp[i].image_width = ((1.00 / 5) * SIZE) * (i + 1);
+		tmp[i].x = 5 * i;
+		tmp[i].image_width = 5 * (i + 1);
 		pthread_create(&thread[i], NULL, celt_mandelbar_func, &tmp[i]);
 		i++;
 	}
