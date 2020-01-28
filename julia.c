@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/28 18:54:35 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:00:54 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		get_color(t_color clr)
 {
 	clr.r = (clr.r >> 16) & 0xFF;
 	clr.g = (clr.g >> 8) & 255;
-	clr.b = clr.b * 255;
+	clr.b = clr.b & 255;
 	return (clr.r + ',' + clr.g + ',' + clr.b);
 }
 
@@ -24,7 +24,6 @@ void			put_pxl(t_fract *data, int x, int y, int color)
 {
 	t_color		clr;
 
-//	color = 0xfff000;
 	if (data->x < SIZE && data->y < SIZE)
 	{
 		clr.r = sin(5 * data->iter + 0) * 127 + 128;
