@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/27 15:22:25 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/28 17:13:06 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ typedef struct	s_color
   int	r;
   int	g;
   int	b;
-  int	pixel;
-
-} t_color;
+} 				t_color;
 
 typedef struct	s_fract
 {
@@ -65,4 +63,5 @@ int				julia_motion(int x, int y, t_fract *fractol);
 void			celt_mandelbar_pthread(t_fract *struct_fract);
 void			draw(t_fract *struct_fract);
 void			mandelbar_pthread(t_fract *struct_fract);
+char			*decToHexa(int n);
 #endif
