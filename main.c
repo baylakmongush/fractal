@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/27 15:25:30 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 01:13:30 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		ft_close(void)
+{
+	exit(1);
+	return (0);
+}
 
 static void		ft_out(void)
 {
@@ -86,6 +92,7 @@ int				main(int ac, char **av)
 		func_init(av[1], struct_fract);
 		nb = ft_itoa(struct_fract->max_iter);
 		draw(struct_fract);
+		mlx_hook(struct_fract->win_ptr, 17, 0L, ft_close, struct_fract);
 		mlx_mouse_hook(struct_fract->win_ptr, mouse_press, struct_fract);
 		mlx_key_hook(struct_fract->win_ptr, key_press, struct_fract);
 		mlx_loop(struct_fract->mlx_ptr);
