@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:20:09 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/28 18:52:43 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 00:32:12 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ struct_fract->min_re;
 		z_re = pow(z_re, 2) - z_im2 + struct_fract->c_re;
 		struct_fract->iter++;
 	}
-	(struct_fract->iter == struct_fract->max_iter) ?
-put_pxl(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
-put_pxl(struct_fract, struct_fract->x,
-struct_fract->y, struct_fract->color * struct_fract->iter);
+	put_pxl(struct_fract, struct_fract->x,
+struct_fract->y);
 }
 
 void			*mandelbar_func(void *data)

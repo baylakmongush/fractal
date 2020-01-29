@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/29 17:36:35 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 00:41:23 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int		get_color(t_color clr)
 {
-	clr.r = (clr.r >> 16) & 0xFF;
-	clr.g = (clr.g >> 8) & 255;
-	clr.b = clr.b & 255;
-	return (clr.r + ',' + clr.g + ',' + clr.b);
+	return ((clr.r << 16) | (clr.g << 8) | clr.b);
 }
 
 void			put_pxl(t_fract *data, int x, int y)
@@ -26,10 +23,12 @@ void			put_pxl(t_fract *data, int x, int y)
 
 	if (data->x < SIZE && data->y < SIZE)
 	{
-		clr.r = sin(0.3 * data->iter + 0) * 127 + 128;
-   		clr.g = sin(0.3 * data->iter + 2) * 127 + 128;
-   		clr.b = sin(0.3 * data->iter + 4) * 127 + 128;
+		clr.r = sin(0.25 * data->iter + 0) * 127 + 128;
+   		clr.g = sin(0.25 * data->iter + 2) * 127 + 128;
+   		clr.b = sin(0.25 * data->iter + 4) * 127 + 128;
 		*(int*)(data->img_ptr + (x + y * SIZE) * data->bpp / 8) = get_color(clr);
+		if (data->iter == data->max_iter)
+			*(int*)(data->img_ptr + (x + y * SIZE) * data->bpp / 8) = 0x000000;
 	}
 }
 
@@ -50,9 +49,7 @@ static void		draw_julia(t_fract *struct_fract)
 		z_re = pow(z_re, 2) - z_im2 + struct_fract->k_re;
 		struct_fract->iter++;
 	}
-	(struct_fract->iter == struct_fract->max_iter) ?
-put_pxl(struct_fract, struct_fract->x, struct_fract->y) :
-put_pxl(struct_fract, struct_fract->x,
+	put_pxl(struct_fract, struct_fract->x,
 	struct_fract->y);
 }
 

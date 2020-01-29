@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/27 16:03:44 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/29 23:50:02 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ struct_fract->min_re;
 		struct_fract->iter++;
 	}
 	(struct_fract->iter == struct_fract->max_iter) ?
-put_pxl(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
+put_pxl(struct_fract, struct_fract->x, struct_fract->y) :
 put_pxl(struct_fract, struct_fract->x,
-struct_fract->y, struct_fract->color * struct_fract->iter);
+struct_fract->y);
 }
 
 void			*mandelbrot_func(void *data)

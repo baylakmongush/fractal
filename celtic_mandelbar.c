@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   celtic_mandelbar.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:21:40 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/27 15:06:58 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 00:32:31 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ struct_fract->min_re;
 		z_im = -2.0 * tmp * z_im + struct_fract->c_im;
 		struct_fract->iter++;
 	}
-	(struct_fract->iter == struct_fract->max_iter) ?
-	put_pxl(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
-	put_pxl(struct_fract, struct_fract->x, struct_fract->y,
-	struct_fract->color * struct_fract->iter);
+	put_pxl(struct_fract, struct_fract->x, struct_fract->y);
 }
 
 void			*celt_mandelbar_func(void *data)

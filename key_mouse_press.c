@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_mouse_press.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/27 15:46:35 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 00:59:07 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ int			key_press(int key, t_fract *struct_fract)
 	if (key == 20)
 		struct_fract->color = 1048585;
 	if (key == 27)
+	{
 		struct_fract->max_iter--;
+		if (struct_fract->max_iter < 0)
+			struct_fract->max_iter = 0;
+	}
 	if (key == 24)
 		struct_fract->max_iter++;
 	if (key == 123)
@@ -89,10 +93,10 @@ struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 
 int			julia_motion(int x, int y, t_fract *fractol)
 {
-	if (x > 0 && x < fractol->image_width && y > 0 && y < fractol->image_width)
+	if (x >= 0 && x <= fractol->image_width && y >= 0 && y <= fractol->image_width)
 	{
-		fractol->k_re = 4 * ((double)x / SIZE - 0.5);
-		fractol->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
+		fractol->k_re = 8 * ((double)x / SIZE - 0.5);
+		fractol->k_im = 8 * ((double)(SIZE - y) / SIZE - 0.5);
 		julia_pthread(fractol);
 	}
 	return (0);
