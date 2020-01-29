@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/28 19:00:54 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:36:35 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ int		get_color(t_color clr)
 	return (clr.r + ',' + clr.g + ',' + clr.b);
 }
 
-void			put_pxl(t_fract *data, int x, int y, int color)
+void			put_pxl(t_fract *data, int x, int y)
 {
 	t_color		clr;
 
 	if (data->x < SIZE && data->y < SIZE)
 	{
-		clr.r = sin(5 * data->iter + 0) * 127 + 128;
-   		clr.g = sin(5 * data->iter + 2) * 127 + 128;
-   		clr.b = sin(5 * data->iter + 4) * 127 + 128;
-		*(int*)(data->img_ptr + (x + y * SIZE) * 4) = color + get_color(clr);
+		clr.r = sin(0.3 * data->iter + 0) * 127 + 128;
+   		clr.g = sin(0.3 * data->iter + 2) * 127 + 128;
+   		clr.b = sin(0.3 * data->iter + 4) * 127 + 128;
+		*(int*)(data->img_ptr + (x + y * SIZE) * data->bpp / 8) = get_color(clr);
 	}
 }
 
@@ -51,9 +51,9 @@ static void		draw_julia(t_fract *struct_fract)
 		struct_fract->iter++;
 	}
 	(struct_fract->iter == struct_fract->max_iter) ?
-put_pxl(struct_fract, struct_fract->x, struct_fract->y, 0x000000) :
+put_pxl(struct_fract, struct_fract->x, struct_fract->y) :
 put_pxl(struct_fract, struct_fract->x,
-	struct_fract->y, struct_fract->color * struct_fract->iter);
+	struct_fract->y);
 }
 
 void			*julia_func(void *data)
