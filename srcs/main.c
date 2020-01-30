@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 14:59:04 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:16:06 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void		func_init(char *str, t_fract *struct_fract)
 		struct_fract->min_re = -1.4;
 		struct_fract->min_im = -1.4;
 		fract_pthread_create(struct_fract);
-		mlx_hook(struct_fract->params.win_ptr, 6, 1L < 6,
+		mlx_hook(struct_fract->params.win_ptr, 6, 1L << 12,
 julia_motion, struct_fract);
 		struct_fract->fractol = 2;
 	}

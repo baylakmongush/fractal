@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 16:35:00 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:17:06 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 
 int			julia_motion(int x, int y, t_fract *fractol)
 {
-	if (x >= 0 && x <= SIZE && y >= 0 &&
-y <= SIZE)
+	if (x >= 0 && x <= SIZE && y >= 0 && y <= SIZE)
 	{
 		fractol->k_re = 4 * ((double)x / SIZE - 0.5);
 		fractol->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
