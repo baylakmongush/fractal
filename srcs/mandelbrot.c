@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 11:35:33 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:49:19 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ struct_fract->min_re;
 		z_re = pow(z_re, 2) - z_im2 + struct_fract->c_re;
 		struct_fract->iter++;
 	}
-	(struct_fract->iter == struct_fract->max_iter) ?
-put_pxl(struct_fract, struct_fract->x, struct_fract->y) :
-put_pxl(struct_fract, struct_fract->x,
+	put_pxl(struct_fract, struct_fract->x,
 struct_fract->y);
 }
 
@@ -58,25 +56,4 @@ void			*mandelbrot_func(void *data)
 		struct_fract->y++;
 	}
 	return (NULL);
-}
-
-void			mandelbrot_pthread(t_fract *struct_fract)
-{
-	t_fract		tmp[160];
-	pthread_t	thread[160];
-	int			i;
-
-	i = 0;
-	while (i < 160)
-	{
-		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = 5 * i;
-		tmp[i].image_width = 5 * (i + 1);
-		pthread_create(&thread[i], NULL, mandelbrot_func, &tmp[i]);
-		i++;
-	}
-	while (i--)
-		pthread_join(thread[i], NULL);
-	mlx_put_image_to_window(struct_fract->mlx_ptr, struct_fract->win_ptr,
-struct_fract->img, 0, 0);
 }

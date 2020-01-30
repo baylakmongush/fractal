@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:21:40 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 11:11:55 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 14:20:43 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,4 @@ void			*celt_mandelbar_func(void *data)
 		struct_fract->y++;
 	}
 	return (NULL);
-}
-
-void			celt_mandelbar_pthread(t_fract *struct_fract)
-{
-	t_fract		tmp[160];
-	pthread_t	thread[160];
-	int			i;
-
-	i = 0;
-	while (i < 160)
-	{
-		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = 5 * i;
-		tmp[i].image_width = 5 * (i + 1);
-		pthread_create(&thread[i], NULL, celt_mandelbar_func, &tmp[i]);
-		i++;
-	}
-	while (i--)
-		pthread_join(thread[i], NULL);
-	mlx_put_image_to_window(struct_fract->mlx_ptr, struct_fract->win_ptr,
-struct_fract->img, 0, 0);
 }
