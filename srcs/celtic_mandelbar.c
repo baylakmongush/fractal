@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:21:40 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 14:20:43 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:52:00 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void			*celt_mandelbar_func(void *data)
 		}
 		struct_fract->y++;
 	}
+	pthread_exit(NULL);
 	return (NULL);
 }

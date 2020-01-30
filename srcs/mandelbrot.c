@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 15:49:19 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:57:08 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void			*mandelbrot_func(void *data)
 		}
 		struct_fract->y++;
 	}
+	pthread_exit(NULL);
 	return (NULL);
 }
