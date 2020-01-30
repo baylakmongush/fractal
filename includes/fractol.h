@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 01:09:35 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/30 11:35:07 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 # define FRACTOL_H
 # define SIZE 800
 # include <stdlib.h>
-# include "minilibx/mlx.h"
-# include "libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "../libft/libft.h"
 # include "math.h"
 # include "pthread.h"
 
 typedef struct	s_color
 {
-  int	r;
-  int	g;
-  int	b;
+  int			r;
+  int			g;
+  int			b;
+  int			center;
+  int			width;
 } 				t_color;
 
 typedef struct	s_fract
 {
-	int			id;
 	double		min_re;
 	double		min_im;
 	int			x;
 	int			y;
 	double		zoom;
-	int			color;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img;
@@ -54,7 +54,7 @@ typedef struct	s_fract
 	pthread_t	pthread;
 }				t_fract;
 
-int				key_press(int key, t_fract *struct_fract);
+int				key_press(int key, t_fract *struct_fract, t_color clr);
 int				mouse_press(int mouse, int x, int y, t_fract *struct_fract);
 void			mandelbrot_pthread(t_fract *data);
 void			put_pxl(t_fract *data, int x, int y);
@@ -64,4 +64,5 @@ void			celt_mandelbar_pthread(t_fract *struct_fract);
 void			draw(t_fract *struct_fract);
 void			mandelbar_pthread(t_fract *struct_fract);
 int				ft_close(void);
+
 #endif

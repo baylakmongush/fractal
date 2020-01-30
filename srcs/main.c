@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 01:13:30 by baylak           ###   ########.fr       */
+/*   Updated: 2020/01/30 11:35:32 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int		ft_close(void)
 {
@@ -45,7 +45,6 @@ static int		init(char *str, t_fract *struct_fract)
 	struct_fract->min_im = -1.2;
 	struct_fract->max_iter = 40;
 	struct_fract->zoom = 300;
-	struct_fract->color = 2065;
 	struct_fract->image_width = 800;
 	return (0);
 }
@@ -81,11 +80,14 @@ int				main(int ac, char **av)
 {
 	t_fract		*struct_fract;
 	char		*nb;
+	t_color		clr;
 
 	if (ac == 1)
 		ft_out();
 	else
 	{
+		clr.width = 127;
+		clr.center = 128;
 		check_valid(av[1]);
 		struct_fract = (t_fract*)malloc(sizeof(t_fract));
 		init(av[1], struct_fract);

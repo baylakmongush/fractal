@@ -1,59 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 00:41:23 by baylak           ###   ########.fr       */
+/*   Created: 2020/01/27 15:20:09 by npetrell          #+#    #+#             */
+/*   Updated: 2020/01/30 11:35:32 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
-int		get_color(t_color clr)
-{
-	return ((clr.r << 16) | (clr.g << 8) | clr.b);
-}
-
-void			put_pxl(t_fract *data, int x, int y)
-{
-	t_color		clr;
-
-	if (data->x < SIZE && data->y < SIZE)
-	{
-		clr.r = sin(0.25 * data->iter + 0) * 127 + 128;
-   		clr.g = sin(0.25 * data->iter + 2) * 127 + 128;
-   		clr.b = sin(0.25 * data->iter + 4) * 127 + 128;
-		*(int*)(data->img_ptr + (x + y * SIZE) * data->bpp / 8) = get_color(clr);
-		if (data->iter == data->max_iter)
-			*(int*)(data->img_ptr + (x + y * SIZE) * data->bpp / 8) = 0x000000;
-	}
-}
-
-static void		draw_julia(t_fract *struct_fract)
+static void		mandelbar_put(t_fract *struct_fract)
 {
 	double		z_re;
 	double		z_im;
 	double		z_im2;
 
-	z_re = struct_fract->x / struct_fract->zoom + struct_fract->min_re;
-	z_im = struct_fract->y / struct_fract->zoom + struct_fract->min_im;
+	struct_fract->c_im = struct_fract->y / struct_fract->zoom +
+struct_fract->min_im;
+	struct_fract->c_re = struct_fract->x / struct_fract->zoom +
+struct_fract->min_re;
+	z_re = struct_fract->c_re;
+	z_im = struct_fract->c_im;
 	struct_fract->iter = 0;
 	while (struct_fract->iter < struct_fract->max_iter &&
-((pow(z_re, 2) + pow(z_im, 2)) < 4))
+((pow(z_re, 2) + pow(z_im, 2)) <= 4))
 	{
 		z_im2 = pow(z_im, 2);
-		z_im = 2 * z_re * z_im + struct_fract->k_im;
-		z_re = pow(z_re, 2) - z_im2 + struct_fract->k_re;
+		z_im = -2 * z_re * z_im + struct_fract->c_im;
+		z_re = pow(z_re, 2) - z_im2 + struct_fract->c_re;
 		struct_fract->iter++;
 	}
 	put_pxl(struct_fract, struct_fract->x,
-	struct_fract->y);
+struct_fract->y);
 }
 
-void			*julia_func(void *data)
+void			*mandelbar_func(void *data)
 {
 	t_fract		*struct_fract;
 	double		tmp;
@@ -66,7 +50,7 @@ void			*julia_func(void *data)
 		struct_fract->x = tmp;
 		while (struct_fract->x < struct_fract->image_width)
 		{
-			draw_julia(struct_fract);
+			mandelbar_put(struct_fract);
 			struct_fract->x++;
 		}
 		struct_fract->y++;
@@ -74,7 +58,7 @@ void			*julia_func(void *data)
 	return (NULL);
 }
 
-void			julia_pthread(t_fract *struct_fract)
+void			mandelbar_pthread(t_fract *struct_fract)
 {
 	t_fract		tmp[160];
 	pthread_t	thread[160];
@@ -86,7 +70,7 @@ void			julia_pthread(t_fract *struct_fract)
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
 		tmp[i].x = 5 * i;
 		tmp[i].image_width = 5 * (i + 1);
-		pthread_create(&thread[i], NULL, julia_func, &tmp[i]);
+		pthread_create(&thread[i], NULL, mandelbar_func, &tmp[i]);
 		i++;
 	}
 	while (i--)
