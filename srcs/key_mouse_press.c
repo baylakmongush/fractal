@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 17:17:06 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:41:18 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void		draw(t_fract *struct_fract)
 	5, 50, 0x3a8888, "zoom up/down: mouse's scroll wheel");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
 	5, 70, 0x3a8888, "iteration up/down key: +, -");
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
+	5, 90, 0x3a8888, "move fractal keys: UP, DOWN, LEFT, RIGHT");
 }
 
 int			key_press(int key, t_fract *struct_fract)

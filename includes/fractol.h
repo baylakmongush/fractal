@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/31 18:59:06 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:32:29 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct	s_fract
 	pthread_t	pthread;
 }				t_fract;
 
+void			func_init(char *str, t_fract *struct_fract);
+int				init(char *str, t_fract *struct_fract);
 int				key_press(int key, t_fract *struct_fract);
 int				key_press2(int key, t_color *clr, t_fract *struct_fract);
 int				mouse_press(int mouse, int x, int y, t_fract *struct_fract);
@@ -73,5 +75,6 @@ void			*mandelbrot_func(void *data);
 void			*julia_func(void *data);
 void			*mandelbar_func(void *data);
 void			*celt_mandelbar_func(void *data);
+void			*celt_mandelbrot_func(void *data);
 
 #endif

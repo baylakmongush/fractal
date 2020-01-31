@@ -6,7 +6,7 @@
 #    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/28 21:46:02 by npetrell          #+#    #+#              #
-#    Updated: 2020/01/30 14:33:22 by npetrell         ###   ########.fr        #
+#    Updated: 2020/01/31 19:32:46 by npetrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LFLAG = -L $(LIBFT) -lft
 MLFLAG = -framework OpenGL -framework Appkit
 
 SRCS = ./main.c ./key_mouse_press.c ./mandelbrot.c ./julia.c ./celtic_mandelbar.c \
-		./mandelbar.c ./color.c ./pthread.c\
+		./celtic_mandelbrot.c ./mandelbar.c ./color.c ./pthread.c ./init.c \
 
 HEADERS = libft/
 
