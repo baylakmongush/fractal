@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:27:06 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 17:44:57 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/31 17:31:58 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ void			*julia_func(void *data)
 		}
 		struct_fract->y++;
 	}
-	pthread_exit(NULL);
 	return (NULL);
 }

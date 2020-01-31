@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 15:00:05 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/31 18:59:06 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_fract
 	int			y;
 	double		zoom;
 	int			image_width;
+	int			image_height;
 	double		iter;
 	double		max_iter;
 	double		k_im;

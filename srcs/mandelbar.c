@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:20:09 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/30 17:47:21 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/01/31 17:38:44 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void			*mandelbar_func(void *data)
 		}
 		struct_fract->y++;
 	}
-	pthread_exit(NULL);
 	return (NULL);
 }
