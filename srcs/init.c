@@ -16,9 +16,9 @@ int				init(char *str, t_fract *struct_fract)
 {
 	struct_fract->params.mlx_ptr = mlx_init();
 	struct_fract->params.win_ptr = mlx_new_window(struct_fract->params.mlx_ptr,
-800, 800, str);
+SIZE, SIZE, str);
 	struct_fract->params.img = mlx_new_image(struct_fract->params.mlx_ptr,
-800, 800);
+SIZE, SIZE);
 	struct_fract->params.img_ptr = mlx_get_data_addr(struct_fract->params.img,
 	&struct_fract->params.bpp, &struct_fract->params.sl,
 	&struct_fract->params.endian);
@@ -44,6 +44,11 @@ static void		func_init2(char *str, t_fract *struct_fract)
 	{
 		fract_pthread_create(struct_fract);
 		struct_fract->fractol = 5;
+	}
+	else if (ft_strcmp(str, "perpen_burning_ship") == 0)
+	{
+		fract_pthread_create(struct_fract);
+		struct_fract->fractol = 6;
 	}
 }
 

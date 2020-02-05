@@ -23,11 +23,9 @@ LFLAG = -L $(LIBFT) -lft
 MLFLAG = -framework OpenGL -framework Appkit
 
 SRCS = main.c key_mouse_press.c mandelbrot.c julia.c celtic_mandelbar.c \
-		celtic_mandelbrot.c mandelbar.c color.c pthread.c init.c \
+		celtic_mandelbrot.c mandelbar.c color.c pthread.c init.c perpen_burning_ship.c
 
 HEADERS = libft/
-
-OBJDIR = objects/
 
 vpath %.c srcs/
 vpath %.h includes/
@@ -38,24 +36,25 @@ OBJS = $(SRCS:%.c=%.o)
 
 #Compile
 $(NAME):	$(OBJS)
-			mkdir $(OBJDIR)
-			make -C $(LIBFT)
-			$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx $@
+			@make -C $(LIBFT)
+			@$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx
+			#@mkdir objects
+			#@mv $(OBJS) objects/
 
 
 #Link
-$(OBJDIR)%.o: %.c
-	$(GCC) -I $(HEADERS) -o $@ -c $<
+%.o: %.c
+	@$(GCC) -I $(HEADERS) -o $@ -c $<
 
 #Clean only Objects
 clean:
-	rm -rf $(OBJDIR)
-	make -C $(LIBFT) clean
+	@rm -rf $(OBJS)#objects/
+	@make -C $(LIBFT) clean
 
 #Clean objects and execution files
 fclean: clean
-	rm -rf $(NAME)
-	make -C $(LIBFT) fclean
+	@rm -rf $(NAME)
+	@make -C $(LIBFT) fclean
 
 re: fclean all
 

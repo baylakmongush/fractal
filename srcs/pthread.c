@@ -34,6 +34,8 @@ t_fract *struct_fract)
 		rc = pthread_create(&thread[i], NULL, mandelbar_func, &tmp[i]);
 	else if (struct_fract->fractol == 5)
 		rc = pthread_create(&thread[i], NULL, celt_mandelbrot_func, &tmp[i]);
+	else if (struct_fract->fractol == 6)
+		rc = pthread_create(&thread[i], NULL, perpen_burning_ship_func, &tmp[i]);
 	rc ? ft_error() : rc;
 }
 

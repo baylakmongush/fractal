@@ -12,7 +12,7 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define SIZE 800
+# define SIZE 940
 # include <stdlib.h>
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
@@ -76,5 +76,6 @@ void			*julia_func(void *data);
 void			*mandelbar_func(void *data);
 void			*celt_mandelbar_func(void *data);
 void			*celt_mandelbrot_func(void *data);
+void			*perpen_burning_ship_func(void *data);
 
 #endif

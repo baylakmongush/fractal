@@ -15,7 +15,8 @@
 static void		ft_out(void)
 {
 	ft_putendl("Usage: ./fractal 'mandelbrot' | 'julia' | \
-'celtic_mandelbar' | 'mandelbar' | 'celtic_mandelrot'");
+'celtic_mandelbar' | 'mandelbar' | 'celtic_mandelrot' \
+'perpen_burning_ship'");
 	exit(0);
 }
 
@@ -23,7 +24,8 @@ static int		check_valid(char *str)
 {
 	if (ft_strcmp(str, "mandelbrot") == 0 || ft_strcmp(str, "julia") == 0
 	|| ft_strcmp(str, "celtic_mandelbar") == 0 ||
-ft_strcmp(str, "mandelbar") == 0 || ft_strcmp(str, "celtic_mandelbrot") == 0)
+ft_strcmp(str, "mandelbar") == 0 || ft_strcmp(str, "celtic_mandelbrot") == 0 \
+|| ft_strcmp(str, "perpen_burning_ship") == 0)
 		return (0);
 	ft_out();
 	return (0);

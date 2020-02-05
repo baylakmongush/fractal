@@ -29,7 +29,7 @@ struct_fract->min_re;
 ((pow(z_re, 2) + pow(z_im, 2)) <= 4))
 	{
 		tmp = z_re;
-		z_re = fabs(pow(z_re, 2) - pow(z_im, 2)) + struct_fract->c_re;
+		z_re = 2.0 * fabs(pow(z_re, 2) - pow(z_im, 2)) + struct_fract->c_re;
 		z_im = 2.0 * tmp * z_im + struct_fract->c_im;
 		struct_fract->iter++;
 	}
