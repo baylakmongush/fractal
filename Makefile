@@ -12,7 +12,7 @@
 
 NAME = fractol
 
-GCC = gcc -Wall -Wextra -Werror 
+GCC = gcc -O3 -Wall -Wextra -Werror 
 
 LIBFT = libft
 
@@ -22,29 +22,37 @@ LFLAG = -L $(LIBFT) -lft
 
 MLFLAG = -framework OpenGL -framework Appkit
 
-SRCS = ./main.c ./key_mouse_press.c ./mandelbrot.c ./julia.c ./celtic_mandelbar.c \
-		./celtic_mandelbrot.c ./mandelbar.c ./color.c ./pthread.c ./init.c \
+SRCS = main.c key_mouse_press.c mandelbrot.c julia.c celtic_mandelbar.c \
+		celtic_mandelbrot.c mandelbar.c color.c pthread.c init.c \
 
 HEADERS = libft/
+
+OBJDIR = objects/
 
 vpath %.c srcs/
 vpath %.h includes/
 
-OBJS = $(SRCS:%.c=%.o)
-
 all: $(NAME)
 
+OBJS = $(SRCS:%.c=%.o)
+
+#Compile
 $(NAME):	$(OBJS)
+			mkdir $(OBJDIR)
 			make -C $(LIBFT)
-			$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx
+			$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx $@
 
-%.o: %.c $(HEADER)
-	$(GCC) -I $(HEADERS) -c $<
 
+#Link
+$(OBJDIR)%.o: %.c
+	$(GCC) -I $(HEADERS) -o $@ -c $<
+
+#Clean only Objects
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJDIR)
 	make -C $(LIBFT) clean
 
+#Clean objects and execution files
 fclean: clean
 	rm -rf $(NAME)
 	make -C $(LIBFT) fclean
