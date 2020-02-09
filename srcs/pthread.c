@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:19:53 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/31 19:38:39 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 18:06:43 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ t_fract *struct_fract)
 	else if (struct_fract->fractol == 5)
 		rc = pthread_create(&thread[i], NULL, celt_mandelbrot_func, &tmp[i]);
 	else if (struct_fract->fractol == 6)
-		rc = pthread_create(&thread[i], NULL, perpen_burning_ship_func, &tmp[i]);
+		rc = pthread_create(&thread[i], NULL, perpen_burning_ship_func,
+		&tmp[i]);
+	else if (struct_fract->fractol == 7)
+		rc = pthread_create(&thread[i], NULL, burning_ship_func, &tmp[i]);
+	else if (struct_fract->fractol == 8)
+		rc = pthread_create(&thread[i], NULL, perpen_mandelbrot_func, &tmp[i]);
 	rc ? ft_error() : rc;
 }
 

@@ -6,7 +6,7 @@
 #    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/28 21:46:02 by npetrell          #+#    #+#              #
-#    Updated: 2020/01/31 19:32:46 by npetrell         ###   ########.fr        #
+#    Updated: 2020/02/09 18:13:21 by npetrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LFLAG = -L $(LIBFT) -lft
 MLFLAG = -framework OpenGL -framework Appkit
 
 SRCS = main.c key_mouse_press.c mandelbrot.c julia.c celtic_mandelbar.c \
-		celtic_mandelbrot.c mandelbar.c color.c pthread.c init.c perpen_burning_ship.c
+		celtic_mandelbrot.c mandelbar.c color.c pthread.c init.c \
+		perpen_burning_ship.c burning_ship.c perpen_mandelbrot.c \
 
 HEADERS = libft/
 
@@ -40,9 +41,6 @@ $(NAME):	$(OBJS)
 			@$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx
 			#@mkdir objects
 			#@mv $(OBJS) objects/
-
-
-#Link
 %.o: %.c
 	@$(GCC) -I $(HEADERS) -o $@ -c $<
 

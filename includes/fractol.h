@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/31 19:32:29 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 17:37:24 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ void			*mandelbar_func(void *data);
 void			*celt_mandelbar_func(void *data);
 void			*celt_mandelbrot_func(void *data);
 void			*perpen_burning_ship_func(void *data);
+void			*burning_ship_func(void *data);
+void			*perpen_mandelbrot_func(void *data);
 
 #endif

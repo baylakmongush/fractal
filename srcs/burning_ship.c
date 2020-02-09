@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   perpen_burning_ship.c                              :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 17:17:26 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 17:17:30 by npetrell         ###   ########.fr       */
+/*   Created: 2020/02/09 17:17:17 by npetrell          #+#    #+#             */
+/*   Updated: 2020/02/09 17:55:27 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-static void		perpen_burning_ship_put(t_fract *struct_fract)
+static void		burning_ship_put(t_fract *struct_fract)
 {
 	double		z_re;
 	double		z_im;
@@ -29,7 +29,7 @@ struct_fract->min_re;
 ((pow(z_re, 2) + pow(z_im, 2)) <= 4))
 	{
 		z_im2 = pow(z_im, 2);
-		z_im = fabs(2 * z_re * z_im + struct_fract->c_im);
+		z_im = 2.0 * fabs(z_re * z_im) + struct_fract->c_im;
 		z_re = pow(z_re, 2) - z_im2 + struct_fract->c_re;
 		struct_fract->iter++;
 	}
@@ -37,7 +37,7 @@ struct_fract->min_re;
 struct_fract->y);
 }
 
-void			*perpen_burning_ship_func(void *data)
+void			*burning_ship_func(void *data)
 {
 	t_fract		*struct_fract;
 	double		tmp;
@@ -50,7 +50,7 @@ void			*perpen_burning_ship_func(void *data)
 		struct_fract->x = tmp;
 		while (struct_fract->x < struct_fract->image_width)
 		{
-			perpen_burning_ship_put(struct_fract);
+			burning_ship_put(struct_fract);
 			struct_fract->x++;
 		}
 		struct_fract->y++;

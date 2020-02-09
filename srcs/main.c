@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/31 19:30:23 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 18:07:15 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void		ft_out(void)
 {
 	ft_putendl("Usage: ./fractal 'mandelbrot' | 'julia' | \
-'celtic_mandelbar' | 'mandelbar' | 'celtic_mandelrot' \
-'perpen_burning_ship'");
+'celtic_mandelbar' | 'mandelbar' | 'celtic_mandelrot' | \
+'perpen_burning_ship' | 'burning_ship' | 'perpen_mandelbrot'");
 	exit(0);
 }
 
@@ -24,8 +24,10 @@ static int		check_valid(char *str)
 {
 	if (ft_strcmp(str, "mandelbrot") == 0 || ft_strcmp(str, "julia") == 0
 	|| ft_strcmp(str, "celtic_mandelbar") == 0 ||
-ft_strcmp(str, "mandelbar") == 0 || ft_strcmp(str, "celtic_mandelbrot") == 0 \
-|| ft_strcmp(str, "perpen_burning_ship") == 0)
+ft_strcmp(str, "mandelbar") == 0 || ft_strcmp(str, \
+"celtic_mandelbrot") == 0 || ft_strcmp(str, "perpen_burning_ship") == 0 || \
+ft_strcmp(str, "burning_ship") == 0 || \
+ft_strcmp(str, "perpen_mandelbrot") == 0)
 		return (0);
 	ft_out();
 	return (0);

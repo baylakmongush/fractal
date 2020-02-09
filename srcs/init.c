@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:29:21 by npetrell          #+#    #+#             */
-/*   Updated: 2020/01/31 19:33:13 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 18:03:13 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ static void		func_init2(char *str, t_fract *struct_fract)
 	{
 		fract_pthread_create(struct_fract);
 		struct_fract->fractol = 6;
+	}
+	else if (ft_strcmp(str, "burning_ship") == 0)
+	{
+		fract_pthread_create(struct_fract);
+		struct_fract->fractol = 7;
+	}
+	else if (ft_strcmp(str, "perpen_mandelbrot") == 0)
+	{
+		fract_pthread_create(struct_fract);
+		struct_fract->fractol = 8;
 	}
 }
 
