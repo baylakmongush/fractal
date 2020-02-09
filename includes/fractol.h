@@ -6,13 +6,13 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 17:37:24 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 19:34:23 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define SIZE 940
+# define SIZE 800
 # include <stdlib.h>
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"

@@ -6,7 +6,7 @@
 #    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/28 21:46:02 by npetrell          #+#    #+#              #
-#    Updated: 2020/02/09 18:13:21 by npetrell         ###   ########.fr        #
+#    Updated: 2020/02/09 18:54:17 by npetrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,21 +39,20 @@ OBJS = $(SRCS:%.c=%.o)
 $(NAME):	$(OBJS)
 			@make -C $(LIBFT)
 			@$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx
-			#@mkdir objects
-			#@mv $(OBJS) objects/
+			@mkdir objects
+			@mv $(OBJS) objects/
 %.o: %.c
 	@$(GCC) -I $(HEADERS) -o $@ -c $<
 
 #Clean only Objects
 clean:
-	@rm -rf $(OBJS)#objects/
+	@rm -rf objects/
 	@make -C $(LIBFT) clean
 
 #Clean objects and execution files
 fclean: clean
 	@rm -rf $(NAME)
 	@make -C $(LIBFT) fclean
-
 re: fclean all
 
 .PHONY: all clean fclean re

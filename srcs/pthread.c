@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:19:53 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 18:06:43 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 19:33:52 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void			fract_pthread_create(t_fract *struct_fract)
 	while (++i < 160)
 	{
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = 5 * i;
-		tmp[i].image_width = 5 * (i + 1);
+		tmp[i].x = (SIZE / 160) * i;
+		tmp[i].image_width = (SIZE / 160) * (i + 1);
 		create(i, tmp, thread, struct_fract);
 	}
 	while (i--)

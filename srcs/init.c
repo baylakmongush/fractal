@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:29:21 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 18:03:13 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 19:32:54 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ SIZE, SIZE);
 	struct_fract->min_im = -1.2;
 	struct_fract->max_iter = 40;
 	struct_fract->zoom = 300;
-	struct_fract->image_width = 800;
 	struct_fract->clr.width = -35;
 	struct_fract->clr.center = 200;
 	struct_fract->clr.step = 0.01;

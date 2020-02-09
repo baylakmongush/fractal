@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 17:46:53 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/09 19:20:08 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,41 +25,41 @@ void		draw(t_fract *struct_fract)
 	fract_pthread_create(struct_fract);
 	nb = ft_itoa(struct_fract->max_iter);
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	SIZE - 130, 10, 0x3a8888, "iteration: ");
+	0, 10, 0x3a8888, "iteration: ");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	SIZE, 10, 0xC5329F, nb);
+	107, 10, 0xC5329F, nb);
 	free(nb);
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	SIZE - 130, 30, 0x3a8888, "colors change key: 1");
+	0, 30, 0x3a8888, "colors change key: 1");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	SIZE - 130, 50, 0x3a8888, "zoom up/down: mouse's scroll wheel");
+	0, 50, 0x3a8888, "zoom up/down: mouse's scroll wheel");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	SIZE - 130, 70, 0x3a8888, "iteration up/down key: +, -");
+	0, 70, 0x3a8888, "iteration up/down key: +, -");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	SIZE - 130, 90, 0x3a8888, "move fractal keys: UP, DOWN, LEFT, RIGHT");
+	0, 90, 0x3a8888, "move fractal keys: UP, DOWN, LEFT, RIGHT");
 }
 
 int			key_press(int key, t_fract *struct_fract)
 {
 	if (key == 53)
 		exit(0);
-	if (key == 27)
+	if (key == 27 || key == 78)
 	{
 		struct_fract->max_iter--;
 		if (struct_fract->max_iter < 0)
 			struct_fract->max_iter = 0;
 	}
-	if (key == 24)
+	if (key == 24 || key == 69)
 		struct_fract->max_iter++;
-	if (key == 123)
+	if (key == 123 || key == 0)
 		struct_fract->min_re += 0.1;
-	if (key == 124)
+	if (key == 124 || key == 2)
 		struct_fract->min_re -= 0.1;
-	if (key == 125)
+	if (key == 125 || key == 1)
 		struct_fract->min_im -= 0.1;
-	if (key == 126)
+	if (key == 126 || key == 13)
 		struct_fract->min_im += 0.1;
-	if (key == 18)
+	if (key == 18 || key == 83)
 		struct_fract->clr.step++;
 	mlx_clear_window(struct_fract->params.mlx_ptr,
 	struct_fract->params.win_ptr);
@@ -87,6 +87,13 @@ struct_fract->min_re) - (x / (struct_fract->zoom / 1.2));
 struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 		struct_fract->zoom /= 1.2;
 		struct_fract->max_iter--;
+	}
+	if (x >= 0 && y >= 0 && x <= 50 && y <= 50)
+	{
+		struct_fract->params.win_ptr = mlx_new_window(struct_fract->params.mlx_ptr,
+SIZE, SIZE, "fractol");
+		struct_fract->fractol = 8;
+		draw(struct_fract);
 	}
 	draw(struct_fract);
 	return (0);
