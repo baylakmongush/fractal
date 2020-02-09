@@ -6,7 +6,7 @@
 #    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/28 21:46:02 by npetrell          #+#    #+#              #
-#    Updated: 2020/02/09 18:54:17 by npetrell         ###   ########.fr        #
+#    Updated: 2020/02/09 22:17:22 by npetrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,6 @@ NAME = fractol
 GCC = gcc -O3 -Wall -Wextra -Werror 
 
 LIBFT = libft
-
-MINILIBX = minilibx
 
 LFLAG = -L $(LIBFT) -lft
 
