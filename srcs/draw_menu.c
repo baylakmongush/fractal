@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   draw_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 22:01:40 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 23:12:27 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/10 04:07:25 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
+
+int			mouse_press1(int mouse, int x, int y, t_fract *struct_fract)
+{
+	if (x >= 0 && y >= 0 && x <= 200 && y <= 200)
+	{
+		struct_fract->params.win_ptr = mlx_new_window(struct_fract->params.mlx_ptr,
+SIZE, SIZE, "fractol");
+	}
+	return (0);
+}
 
 static void		draw_pix(int x1, int y1, int x2, int y2, int color, t_fract *struct_fract)
 {
@@ -45,18 +55,20 @@ static void     draw_square(t_fract *struct_fract)
 {
     int i;
     int j;
+	int	color;
 
-//	while (j < 800)
- //   {
+	//while (j < 800)
+	//{
 		i = 0;
 		while (i < 200)
 		{
-			draw_pix(0, i, 200, i, 0xffc0cb, struct_fract);
+			draw_pix(j, i, j + 200, i, 0xccccff, struct_fract);
 			i++;
 		}
+		mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr, 50, 100, 0x000000, "mandelbrot");
 		while (i < 400)
 		{
-			draw_pix(0, i, 200, i, 0xc0cbff, struct_fract);
+			draw_pix(j, i, j + 200, i, 0x33cccc, struct_fract);
 			i++;
 		}
 		i = 0;
@@ -78,11 +90,20 @@ static void     draw_square(t_fract *struct_fract)
 		}
 		while (i < 400)
 		{
-			draw_pix(400, i, 600, i, 0xc0fff4, struct_fract);
+			draw_pix(400, i, 600, i, 0xff99cc, struct_fract);
 			i++;
 		}
-//		j++;
-//	}
+		i = 0;
+		while (i < 200)
+		{
+			draw_pix(600, i, 800, i, 0xffffcc, struct_fract);
+			i++;
+		}
+		while (i < 400)
+		{
+			draw_pix(600, i, 800, i, 0xccff99, struct_fract);
+			i++;
+		}
 }
 
 void			draw_menu(t_fract *struct_fract)
@@ -109,7 +130,6 @@ void			draw_menu(t_fract *struct_fract)
 		}
 		j++;
 	}
-
 }
 
 int main()
@@ -119,7 +139,13 @@ int main()
     struct_fract = (t_fract*)malloc(sizeof(t_fract));
     struct_fract->params.mlx_ptr = mlx_init();
 	struct_fract->params.win_ptr = mlx_new_window(struct_fract->params.mlx_ptr,
-802, 402, "menu");
+801, 401, "menu");
     draw_menu(struct_fract);
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr, 50, 100, 0x000000, "mandelbrot");
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr, 15, 300, 0xffffff, "celtic mandelbrot");
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr, 240, 80, 0xffffff, "perpendicular");
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr, 255, 110, 0xffffff, "mandelbrot");
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr, 270, 300, 0xffffff, "julia");
+	mlx_mouse_hook(struct_fract->params.win_ptr, mouse_press1, struct_fract);
     mlx_loop(struct_fract->params.mlx_ptr);
 }
