@@ -49,8 +49,8 @@ int				main(int ac, char **av)
 		func_init(av[1], struct_fract);
 		nb = ft_itoa(struct_fract->max_iter);
 		draw(struct_fract);
-		mlx_hook(struct_fract->params.win_ptr, 17, 1 << 0,
-		ft_close, struct_fract);
+		/* mlx_hook(struct_fract->params.win_ptr, 17, 1 << 0,
+		ft_close, struct_fract); */
 		mlx_mouse_hook(struct_fract->params.win_ptr, mouse_press, struct_fract);
 		mlx_key_hook(struct_fract->params.win_ptr, key_press, struct_fract);
 		mlx_loop(struct_fract->params.mlx_ptr);

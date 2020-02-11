@@ -77,7 +77,6 @@ struct_fract->min_re) - (x / (struct_fract->zoom * 1.2));
 		struct_fract->min_im = (y / struct_fract->zoom +
 struct_fract->min_im) - (y / (struct_fract->zoom * 1.2));
 		struct_fract->zoom *= 1.2;
-		struct_fract->max_iter++;
 	}
 	if (mouse == 5)
 	{
@@ -86,14 +85,17 @@ struct_fract->min_re) - (x / (struct_fract->zoom / 1.2));
 		struct_fract->min_im = (y / struct_fract->zoom +
 struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 		struct_fract->zoom /= 1.2;
-		struct_fract->max_iter--;
 	}
 	if (x >= 0 && y >= 0 && x <= 50 && y <= 50)
 	{
-		struct_fract->params.win_ptr = mlx_new_window(struct_fract->params.mlx_ptr,
-SIZE, SIZE, "fractol");
-		struct_fract->fractol = 8;
-		draw(struct_fract);
+		struct_fract->params.mlx = mlx_init();
+		struct_fract->params.win = mlx_new_window(struct_fract->params.mlx,
+801, 401, "main");
+		draw_menu(struct_fract);
+		mlx_hook(struct_fract->params.win, 17, 1 << 0,
+		ft_close, struct_fract);
+		mlx_mouse_hook(struct_fract->params.win, mouse_press1, struct_fract);
+		mlx_loop(struct_fract->params.mlx);
 	}
 	draw(struct_fract);
 	return (0);

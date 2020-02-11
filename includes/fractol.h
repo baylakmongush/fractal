@@ -12,7 +12,7 @@
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define SIZE 800
+# define SIZE 900
 # include <stdlib.h>
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
@@ -33,6 +33,8 @@ typedef struct	s_prms
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void		*mlx;
+	void		*win;
 	void		*img;
 	void		*img_ptr;
 	int			endian;
@@ -79,5 +81,8 @@ void			*celt_mandelbrot_func(void *data);
 void			*perpen_burning_ship_func(void *data);
 void			*burning_ship_func(void *data);
 void			*perpen_mandelbrot_func(void *data);
+int				mouse_press1(int mouse, int x, int y, t_fract *struct_fract);
+void			draw_menu(t_fract *struct_fract);
+void			draw_pix(int x1, int y1, int x2, int y2, int color, t_fract *struct_fract);
 
 #endif

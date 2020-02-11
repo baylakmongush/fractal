@@ -46,16 +46,16 @@ t_fract *struct_fract)
 
 void			fract_pthread_create(t_fract *struct_fract)
 {
-	t_fract		tmp[160];
-	pthread_t	thread[160];
+	t_fract		tmp[SIZE / 10];
+	pthread_t	thread[SIZE / 10];
 	int			i;
 
 	i = -1;
-	while (++i < 160)
+	while (++i < SIZE / 10)
 	{
 		ft_memcpy((void*)&tmp[i], (void*)struct_fract, sizeof(t_fract));
-		tmp[i].x = (SIZE / 160) * i;
-		tmp[i].image_width = (SIZE / 160) * (i + 1);
+		tmp[i].x = 10 * i;
+		tmp[i].image_width = 10 * (i + 1);
 		create(i, tmp, thread, struct_fract);
 	}
 	while (i--)

@@ -22,7 +22,7 @@ MLFLAG = -framework OpenGL -framework Appkit
 
 SRCS = main.c key_mouse_press.c mandelbrot.c julia.c celtic_mandelbar.c \
 		celtic_mandelbrot.c mandelbar.c color.c pthread.c init.c \
-		perpen_burning_ship.c burning_ship.c perpen_mandelbrot.c \
+		perpen_burning_ship.c burning_ship.c perpen_mandelbrot.c draw_main.c \
 
 HEADERS = libft/
 
