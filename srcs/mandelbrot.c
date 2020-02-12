@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:43:44 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 17:56:15 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/12 22:16:50 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,3 @@ void			*mandelbrot_func(void *data)
 	}
 	return (NULL);
 }
-
-/*
-** int     main()
-** {
-**     return 0;
-** }
-*/

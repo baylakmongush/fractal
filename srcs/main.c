@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:13:47 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 18:07:15 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/12 22:29:42 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ int				main(int ac, char **av)
 		func_init(av[1], struct_fract);
 		nb = ft_itoa(struct_fract->max_iter);
 		draw(struct_fract);
-		/* mlx_hook(struct_fract->params.win_ptr, 17, 1 << 0,
-		ft_close, struct_fract); */
+		free(nb);
+		mlx_hook(struct_fract->params.win_ptr, 17, 1 << 0,
+		ft_close, struct_fract);
 		mlx_mouse_hook(struct_fract->params.win_ptr, mouse_press, struct_fract);
 		mlx_key_hook(struct_fract->params.win_ptr, key_press, struct_fract);
+		mlx_hook(struct_fract->params.win_ptr, 2, 0,
+		key_press, struct_fract);
 		mlx_loop(struct_fract->params.mlx_ptr);
 	}
 }

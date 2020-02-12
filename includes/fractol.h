@@ -6,18 +6,28 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 20:37:30 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/09 19:34:23 by npetrell         ###   ########.fr       */
+/*   Updated: 2020/02/12 22:14:05 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define SIZE 900
+# define SIZE 800
 # include <stdlib.h>
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 # include "math.h"
 # include "pthread.h"
+
+typedef	struct	s_coords
+{
+	int			x1;
+	int			y1;
+	int			z1;
+	int			x2;
+	int			y2;
+	int			z2;
+}				t_coord;
 
 typedef struct	s_color
 {
@@ -40,12 +50,14 @@ typedef struct	s_prms
 	int			endian;
 	int			sl;
 	int			bpp;
+	int			pressed;
 }				t_prms;
 
 typedef struct	s_fract
 {
 	t_prms		params;
 	t_color		clr;
+	int			color;
 	double		min_re;
 	double		min_im;
 	int			x;
@@ -82,7 +94,13 @@ void			*perpen_burning_ship_func(void *data);
 void			*burning_ship_func(void *data);
 void			*perpen_mandelbrot_func(void *data);
 int				mouse_press1(int mouse, int x, int y, t_fract *struct_fract);
-void			draw_menu(t_fract *struct_fract);
-void			draw_pix(int x1, int y1, int x2, int y2, int color, t_fract *struct_fract);
+void			draw_menu(int i, int j, t_fract *struct_fract, t_coord xyz);
+void			draw_pix(t_coord xyz, t_fract *struct_fract);
+void			draw_square(t_fract *struct_fract);
+void			init_main(t_fract *struct_fract);
+void			first(t_fract *struct_fract);
+void			second(t_fract *struct_fract);
+void			third(t_fract *struct_fract);
+void			fourth(t_fract *struct_fract);
 
 #endif

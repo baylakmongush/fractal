@@ -30,21 +30,24 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	  ft_lstmap.c \
 	  ft_abs.c ft_sqrt.c ft_count_word.c ft_strnlen.c is_power_of_2.c \
 
-OFILES = $(SRC:.c=.o)
+OFILES = $(SRC:%.c=%.o)
+
+vpath %.c srcs/
+OBJ = $(addprefix objects/,$(OFILES))
 
 all: $(NAME)
 
-$(NAME): $(OFILES)
-		ar rc $(NAME) $(OFILES)
-			ranlib $(NAME)
+$(NAME): $(OBJ)
+		@ar rc $(NAME) $(OBJ)
+		@ranlib $(NAME)
 
-%.o: %.c $(HEADER)
-		gcc -Wall -Werror -Wextra -c $<
+objects/%.o: %.c
+		@gcc -Wall -Werror -Wextra -o $@ -c $<
 
 clean: 
-		/bin/rm -f $(OFILES)
+		@/bin/rm -f objects/$(OFILES)
 
 fclean: clean
-		/bin/rm -f $(NAME)
+		@/bin/rm -f $(NAME)
 
 re: fclean all

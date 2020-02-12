@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: baylak <baylak@student.42.fr>              +#+  +:+       +#+         #
+#    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/28 21:46:02 by npetrell          #+#    #+#              #
-#    Updated: 2020/02/12 12:19:58 by baylak           ###   ########.fr        #
+#    Updated: 2020/02/12 22:12:07 by npetrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,11 @@ MLFLAG = -framework OpenGL -framework Appkit
 SRCS = main.c key_mouse_press.c mandelbrot.c julia.c celtic_mandelbar.c \
 		celtic_mandelbrot.c mandelbar.c color.c pthread.c init.c \
 		perpen_burning_ship.c burning_ship.c perpen_mandelbrot.c draw_main.c \
+		bresenham.c colors_main.c \
 
 HEADERS = libft/
+
+OBJS = $(SRCS:%.c=%.o)
 
 vpath %.c srcs/
 vpath %.h includes/
@@ -32,19 +35,17 @@ OBJ = $(addprefix objects/,$(OBJS))
 
 all: $(NAME)
 
-OBJS = $(SRCS:%.c=%.o)
-
 #Compile
-$(NAME):	$(OBJ)
+
+$(NAME): $(OBJ)
 			@make -C $(LIBFT)
-			@$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx
+			$(GCC) -o $(NAME) $(OBJ) $(LFLAG) $(MLFLAG) -lmlx
 objects/%.o: %.c
-	@mkdir objects
 	@$(GCC) -I $(HEADERS) -o $@ -c $<
 
 #Clean only Objects
 clean:
-	@rm -rf objects/
+	@rm -rf objects/*.o
 	@make -C $(LIBFT) clean
 
 #Clean objects and execution files

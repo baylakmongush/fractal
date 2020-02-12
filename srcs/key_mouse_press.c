@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_mouse_press.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:40:55 by npetrell          #+#    #+#             */
-/*   Updated: 2020/02/12 12:06:13 by baylak           ###   ########.fr       */
+/*   Updated: 2020/02/12 19:35:19 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,25 @@ void		draw(t_fract *struct_fract)
 	fract_pthread_create(struct_fract);
 	nb = ft_itoa(struct_fract->max_iter);
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	0, 10, 0x3a8888, "iteration: ");
+	0, 20, 0x3a8888, "choose other fractals: ");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	107, 10, 0xC5329F, nb);
+	0, 40, 0x3a8888, "click here");
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
+	0, 60, 0x3a8888, "iteration: ");
+	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
+	107, 60, 0xC5329F, nb);
 	free(nb);
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	0, 30, 0x3a8888, "colors change key: 1");
+	0, 80, 0x3a8888, "colors change key: 1");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	0, 50, 0x3a8888, "zoom up/down: mouse's scroll wheel");
+	0, 100, 0x3a8888, "zoom up/down: mouse's scroll wheel");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	0, 70, 0x3a8888, "iteration up/down key: +, -");
+	0, 120, 0x3a8888, "iteration up/down key: +, -");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	0, 90, 0x3a8888, "move fractal keys: UP, DOWN, LEFT, RIGHT");
+	0, 140, 0x3a8888, "move fractal keys: UP, DOWN, LEFT, RIGHT");
+	if (struct_fract->fractol == 2)
+		mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.\
+	win_ptr, 0, 160, 0x3a8888, "click left mouse, if you wanna start moving");
 }
 
 int			key_press(int key, t_fract *struct_fract)
@@ -86,28 +93,25 @@ struct_fract->min_re) - (x / (struct_fract->zoom / 1.2));
 struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 		struct_fract->zoom /= 1.2;
 	}
+	if (mouse == 1)
+		struct_fract->params.pressed = 1;
+	if (mouse == 2)
+		struct_fract->params.pressed = 0;
 	if (x >= 0 && y >= 0 && x <= 50 && y <= 50)
-	{
-		struct_fract->params.mlx = mlx_init();
-		struct_fract->params.win = mlx_new_window(struct_fract->params.mlx,
-801, 401, "main");
-		draw_menu(struct_fract);
-		mlx_hook(struct_fract->params.win, 17, 1 << 0,
-		ft_close, struct_fract);
-		mlx_mouse_hook(struct_fract->params.win, mouse_press1, struct_fract);
-		mlx_loop(struct_fract->params.mlx);
-	}
+		init_main(struct_fract);
 	draw(struct_fract);
 	return (0);
 }
 
 int			julia_motion(int x, int y, t_fract *fractol)
 {
-	if (x >= 0 && x <= SIZE && y >= 0 && y <= SIZE)
+	if (fractol->params.pressed == 1)
 	{
 		fractol->k_re = 4 * ((double)x / SIZE - 0.5);
 		fractol->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
 		fract_pthread_create(fractol);
+		mlx_string_put(fractol->params.mlx_ptr, fractol->params.win_ptr,
+	0, 10, 0x3a8888, "click right mouse, if you wanna stop moving");
 	}
 	return (0);
 }
