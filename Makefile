@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+         #
+#    By: baylak <baylak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/28 21:46:02 by npetrell          #+#    #+#              #
-#    Updated: 2020/02/09 22:17:22 by npetrell         ###   ########.fr        #
+#    Updated: 2020/02/12 12:19:58 by baylak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,18 +28,18 @@ HEADERS = libft/
 
 vpath %.c srcs/
 vpath %.h includes/
+OBJ = $(addprefix objects/,$(OBJS))
 
 all: $(NAME)
 
 OBJS = $(SRCS:%.c=%.o)
 
 #Compile
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJ)
 			@make -C $(LIBFT)
 			@$(GCC) -o $(NAME) $(OBJS) $(LFLAG) $(MLFLAG) -lmlx
-			@mkdir objects
-			@mv $(OBJS) objects/
-%.o: %.c
+objects/%.o: %.c
+	@mkdir objects
 	@$(GCC) -I $(HEADERS) -o $@ -c $<
 
 #Clean only Objects
