@@ -27,7 +27,7 @@ void		draw(t_fract *struct_fract)
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
 	0, 20, 0x3a8888, "choose other fractals: ");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
-	0, 40, 0x3a8888, "click here");
+	0, 40, 0xC71585, "click here");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
 	0, 60, 0x3a8888, "iteration: ");
 	mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.win_ptr,
@@ -43,7 +43,7 @@ void		draw(t_fract *struct_fract)
 	0, 140, 0x3a8888, "move fractal keys: UP, DOWN, LEFT, RIGHT");
 	if (struct_fract->fractol == 2)
 		mlx_string_put(struct_fract->params.mlx_ptr, struct_fract->params.\
-	win_ptr, 0, 160, 0x3a8888, "click left mouse, if you wanna start moving");
+	win_ptr, 0, 160, 0xC71585, "click left mouse, if you wanna start moving");
 }
 
 int			key_press(int key, t_fract *struct_fract)
@@ -59,18 +59,15 @@ int			key_press(int key, t_fract *struct_fract)
 	if (key == 24 || key == 69)
 		struct_fract->max_iter++;
 	if (key == 123 || key == 0)
-		struct_fract->min_re += 0.1;
+		struct_fract->min_re += 0.05;
 	if (key == 124 || key == 2)
-		struct_fract->min_re -= 0.1;
+		struct_fract->min_re -= 0.05;
 	if (key == 125 || key == 1)
-		struct_fract->min_im -= 0.1;
+		struct_fract->min_im -= 0.05;
 	if (key == 126 || key == 13)
-		struct_fract->min_im += 0.1;
+		struct_fract->min_im += 0.05;
 	if (key == 18 || key == 83)
 		struct_fract->clr.step++;
-	mlx_clear_window(struct_fract->params.mlx_ptr,
-	struct_fract->params.win_ptr);
-	ft_bzero(struct_fract->params.img_ptr, 0);
 	draw(struct_fract);
 	return (0);
 }
@@ -97,7 +94,7 @@ struct_fract->min_im) - (y / (struct_fract->zoom / 1.2));
 		struct_fract->params.pressed = 1;
 	if (mouse == 2)
 		struct_fract->params.pressed = 0;
-	if (x >= 0 && y >= 0 && x <= 50 && y <= 50)
+	if (x >= 0 && y >= 0 && x <= 60 && y <= 60)
 		init_main(struct_fract);
 	draw(struct_fract);
 	return (0);
@@ -111,7 +108,7 @@ int			julia_motion(int x, int y, t_fract *fractol)
 		fractol->k_im = 4 * ((double)(SIZE - y) / SIZE - 0.5);
 		fract_pthread_create(fractol);
 		mlx_string_put(fractol->params.mlx_ptr, fractol->params.win_ptr,
-	0, 10, 0x3a8888, "click right mouse, if you wanna stop moving");
+	0, 10, 0xC71585, "click right mouse, if you wanna stop moving");
 	}
 	return (0);
 }

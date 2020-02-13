@@ -50,11 +50,8 @@ int				main(int ac, char **av)
 		nb = ft_itoa(struct_fract->max_iter);
 		draw(struct_fract);
 		free(nb);
-		mlx_hook(struct_fract->params.win_ptr, 17, 1 << 0,
-		ft_close, struct_fract);
 		mlx_mouse_hook(struct_fract->params.win_ptr, mouse_press, struct_fract);
-		mlx_key_hook(struct_fract->params.win_ptr, key_press, struct_fract);
-		mlx_hook(struct_fract->params.win_ptr, 2, 0,
+		mlx_hook(struct_fract->params.win_ptr, 2, 1 << 0,
 		key_press, struct_fract);
 		mlx_loop(struct_fract->params.mlx_ptr);
 	}

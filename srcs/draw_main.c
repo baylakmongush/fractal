@@ -91,10 +91,9 @@ int				mouse_press1(int mouse, int x, int y, t_fract *struct_fract)
 	name_main1(x, y, struct_fract, mouse);
 	name_main2(x, y, struct_fract, mouse);
 	draw(struct_fract);
-	mlx_hook(struct_fract->params.win_ptr, 17, 1 << 0,
-	ft_close, struct_fract);
 	mlx_mouse_hook(struct_fract->params.win_ptr, mouse_press, struct_fract);
-	mlx_key_hook(struct_fract->params.win_ptr, key_press, struct_fract);
+	mlx_hook(struct_fract->params.win_ptr, 2, 1 << 0,
+		key_press, struct_fract);
 	mlx_loop(struct_fract->params.mlx_ptr);
 	return (0);
 }
