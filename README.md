@@ -1,6 +1,13 @@
 # fractal
 This project is meant to create graphically beautiful fractals using graphical library: the miniLibX.
 
+# How to install
+1. git clone https://github.com/npetrelli/fractol
+2. cd fractol
+3. make
+4. ./fractol
+
+# Screenshots
 
 ![alt text](https://github.com/npetrelli/fractal/blob/master/4.png "Menu")
  
